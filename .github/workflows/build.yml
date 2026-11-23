@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+            - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -41,6 +41,15 @@ jobs:
       - name: Add Android platform
         working-directory: app
         run: cordova platform add android
+
+              - name: Check Java and Gradle
+        run: |
+          echo "JAVA_HOME=$JAVA_HOME"
+          which java
+          java -version
+          echo "Gradle version:"
+          cd app
+          ./platforms/android/gradlew -version
 
       - name: Build APK
         working-directory: app
