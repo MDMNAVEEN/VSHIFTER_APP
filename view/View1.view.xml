@@ -37,7 +37,9 @@
 						</VBox>
 						<HBox class="cl_footer sapUiLargeMarginBeginEnd sapUiSmallMarginTop" height="3rem" width="100%" alignContent="Center" alignItems="Center"
 							justifyContent="Center">
-							<Button text="Cancel" icon="{JM_ImageModel>/path}frag_close.svg" press="fncancel" class=" sapUiSizeCompact increaseFont cl_fragclose"/>
+							<Button text="Cancel" icon="{JM_ImageModel>/path}frag_close.svg" press="fncancel_test" class=" sapUiSizeCompact increaseFont cl_fragclose"/>
+					
+							<!-- <Button text="Cancel" icon="{JM_ImageModel>/path}frag_close.svg" press="fncancel" class=" sapUiSizeCompact increaseFont cl_fragclose"/> -->
 							<Button icon="{JM_ImageModel>/path}ok.svg" text="Ok" press="fnDiaclose" class="sapUiSmallMarginBegin sapUiSizeCompact cl_fragcreate"/>
 						</HBox>
 					</VBox>

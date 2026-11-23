@@ -2515,6 +2515,9 @@ this._loadApexCharts()
 				// userid4.getBinding().filter(new sap.ui.model.Filter("Ekorg", sap.ui.model.FilterOperator.All, mat));
 			}
 		},
+		fncancel_test : function(){
+			
+		},
 		fncancel: function() {
 			this.initialLoad();
 			sup_name = "";
