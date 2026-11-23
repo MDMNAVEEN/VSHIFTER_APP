@@ -257,22 +257,22 @@ sap.ui.define([
 
 			var that = this;
 
-			this._loadApexCharts()
-				.then(function() {
+			// this._loadApexCharts()
+			// 	.then(function() {
 
-					console.log("ApexCharts loaded successfully");
+			// 		console.log("ApexCharts loaded successfully");
 
-					that.localchart();
-					that.localchart1();
-					that.drawChart();
-					that.drawChartbar();
-					that.drawChart1();
-					that.drawChartBreak();
+			// 		that.localchart();
+			// 		that.localchart1();
+			// 		that.drawChart();
+			// 		that.drawChartbar();
+			// 		that.drawChart1();
+			// 		that.drawChartBreak();
 
-				})
-				.catch(function(error) {
-					console.error("ApexCharts loading error:", error);
-				});
+			// 	})
+			// 	.catch(function(error) {
+			// 		console.error("ApexCharts loading error:", error);
+			// 	});
 
 			//End By Naveen
 			// var loadinglocal = google.charts.load('current', {
