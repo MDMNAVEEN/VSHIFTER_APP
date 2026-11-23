@@ -125,54 +125,37 @@ sap.ui.define([
 			this.getView().byId("id_dia").open();
 			// this.byId("id_dia").setVisible(false);
 		},
-		_loadApexCharts: function() {
+	
+_loadApexCharts: function() {
 
-			if (window.ApexCharts) {
-				return Promise.resolve();
-			}
+    return new Promise(function(resolve, reject) {
 
-			// Reuse the loading promise if another method already requested it
-			if (this._apexChartsPromise) {
-				return this._apexChartsPromise;
-			}
+        if (window.ApexCharts) {
+            resolve();
+            return;
+        }
 
-			this._apexChartsPromise = new Promise(function(resolve, reject) {
+        var attempts = 0;
 
-				var script = document.getElementById("apexChartsLoader");
+        var checkApex = setInterval(function() {
 
-				if (!script) {
-					script = document.createElement("script");
-					script.id = "apexChartsLoader";
-					script.src = "https://cdn.jsdelivr.net/npm/apexcharts";
-					script.async = true;
-					document.head.appendChild(script);
-				}
+            attempts++;
 
-				if (window.ApexCharts) {
-					resolve();
-					return;
-				}
+            if (window.ApexCharts) {
+                clearInterval(checkApex);
+                resolve();
+            }
 
-				script.addEventListener("load", function() {
-					if (window.ApexCharts) {
-						resolve();
-					} else {
-						reject(new Error("ApexCharts library not available"));
-					}
-				}, {
-					once: true
-				});
+            if (attempts >= 50) {
+                clearInterval(checkApex);
+                reject(new Error("ApexCharts failed to load"));
+            }
 
-				script.addEventListener("error", function() {
-					reject(new Error("Failed to load ApexCharts"));
-				}, {
-					once: true
-				});
+        }, 100);
 
-			});
+    });
+},
 
-			return this._apexChartsPromise;
-		},
 		onInit: function() {
 			// var p1 = oEvent.oSource.oParent
 			// var p2 = p1.oParent
@@ -257,22 +240,34 @@ sap.ui.define([
 
 			var that = this;
 
-			// this._loadApexCharts()
-			// 	.then(function() {
+		
+this._loadApexCharts()
+.then(function() {
 
-			// 		console.log("ApexCharts loaded successfully");
+	var chartFunctions = [
+		"localchart",
+		"localchart1",
+		"drawChart",
+		"drawChartbar",
+		"drawChart1",
+		"drawChartBreak"
+	];
 
-			// 		that.localchart();
-			// 		that.localchart1();
-			// 		that.drawChart();
-			// 		that.drawChartbar();
-			// 		that.drawChart1();
-			// 		that.drawChartBreak();
+	chartFunctions.forEach(function(fn) {
 
-			// 	})
-			// 	.catch(function(error) {
-			// 		console.error("ApexCharts loading error:", error);
-			// 	});
+		try {
+			that[fn]();
+		} catch (error) {
+			console.error(fn + " failed:", error);
+		}
+
+	});
+
+})
+.catch(function(error) {
+	console.error("ApexCharts loading error:", error);
+});
+
 
 			//End By Naveen
 			// var loadinglocal = google.charts.load('current', {
