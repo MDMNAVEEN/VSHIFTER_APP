@@ -40,10 +40,21 @@ jobs:
           echo "Searching for UI5 files:"
           find . -type f \( -name "index.html" -o -name "Component.js" -o -name "manifest.json" \)
 
+     
       - name: Create Cordova project
         run: |
           cordova create app com.mdm.vshifter VSHIFTER_APP
-          echo "Cordova project created"
+
+          rsync -av \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='app/' \
+            --exclude='webapp/' \
+            ./ app/www/
+
+          if [ -d webapp/localService ]; then
+            cp -r webapp/localService app/www/
+          fi
 
       - name: Verify Webapp Files
         run: |
@@ -52,6 +63,7 @@ jobs:
           test -f app/www/index.html
           test -f app/www/Component.js
           test -f app/www/manifest.json
+
 
       - name: Add Android platform
         working-directory: app
