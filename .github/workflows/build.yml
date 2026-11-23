@@ -32,11 +32,18 @@ jobs:
       - name: Install Cordova
         run: npm install -g cordova
 
+            - name: Check Repository Structure
+        run: |
+          echo "Repository root:"
+          pwd
+          ls -la
+          echo "Searching for UI5 files:"
+          find . -type f \( -name "index.html" -o -name "Component.js" -o -name "manifest.json" \)
+
       - name: Create Cordova project
         run: |
           cordova create app com.mdm.vshifter VSHIFTER_APP
-          rm -rf app/www/*
-          cp -r webapp/. app/www/
+          echo "Cordova project created"
 
       - name: Verify Webapp Files
         run: |
