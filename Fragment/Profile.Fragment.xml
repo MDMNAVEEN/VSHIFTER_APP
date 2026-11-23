@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="{i18n>Order Type}" class="sapUiPopupWithPadding sapUiSizeCompact cl_shift1" items="{JMProfile>/}" search="fnSearchProfile" liveChange="fnSearchProfile"
+		confirm="fnCloseProfile" cancel="fnCloseProfile">
+		<StandardListItem title="{JMProfile>Pasch}" class="cl_font_txt"/>
+	</SelectDialog>
+</core:FragmentDefinition>

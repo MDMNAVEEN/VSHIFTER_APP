@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="{i18n>Material}" class="sapUiPopupWithPadding sapUiSizeCompact cl_shift1" items="{JMMat>/}" search="fnSearchMaterial" liveChange="fnSearchMaterial"
+		confirm="fnCloseMatFrg" cancel="fnCloseMatFrg">
+		<StandardListItem title="{JMMat>Matnr}" info="{JMMat>Maktx}" class="cl_font_txt"/>
+	</SelectDialog>
+</core:FragmentDefinition>

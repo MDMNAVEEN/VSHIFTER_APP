@@ -1,0 +1,292 @@
+{
+    "resources": [
+        {
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": ".user.project.json"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "model/Formatter.js"
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "Image/VShifterlogo.svg"
+        },
+        {
+            "name": "Image/ok.svg"
+        },
+        {
+            "name": "Image/DownloadPDF.svg"
+        },
+        {
+            "name": "Image/Profile2.svg"
+        },
+        {
+            "name": "Image/ConfirmationW.svg"
+        },
+        {
+            "name": "Image/Close.svg"
+        },
+        {
+            "name": "Image/SettingsW.svg"
+        },
+        {
+            "name": "Image/BellW.svg"
+        },
+        {
+            "name": "Image/save.svg"
+        },
+        {
+            "name": "Image/add.svg"
+        },
+        {
+            "name": "Image/edit.svg"
+        },
+        {
+            "name": "Image/Toolbar.png"
+        },
+        {
+            "name": "Image/CloseW.svg"
+        },
+        {
+            "name": "Image/frag_close.svg"
+        },
+        {
+            "name": "Image/Dashboard.svg"
+        },
+        {
+            "name": "Image/Prd_Order_Release.svg"
+        },
+        {
+            "name": "Image/CancelW.svg"
+        },
+        {
+            "name": "Image/Component.svg"
+        },
+        {
+            "name": "Image/Cancel.svg"
+        },
+        {
+            "name": "Image/frag_create.svg"
+        },
+        {
+            "name": "Image/Clear.svg"
+        },
+        {
+            "name": "Image/Settings.svg"
+        },
+        {
+            "name": "Image/Profile4.svg"
+        },
+        {
+            "name": "Image/tbclose.svg"
+        },
+        {
+            "name": "Image/EquipmentDashboardW.svg"
+        },
+        {
+            "name": "Image/createNotification.svg"
+        },
+        {
+            "name": "Image/Download.svg"
+        },
+        {
+            "name": "Image/PDF.svg"
+        },
+        {
+            "name": "Image/calculator.svg"
+        },
+        {
+            "name": "Image/confirm.svg"
+        },
+        {
+            "name": "Image/Profile.jpg"
+        },
+        {
+            "name": "Image/Equipment_Dashboard.svg"
+        },
+        {
+            "name": "Image/DownloadPDFB.svg"
+        },
+        {
+            "name": "Image/VShifter.svg"
+        },
+        {
+            "name": "Image/Applyfilter.svg"
+        },
+        {
+            "name": "Image/ShiftDashboardW.svg"
+        },
+        {
+            "name": "Image/Profile1.svg"
+        },
+        {
+            "name": "Image/Prd_Cancel.svg"
+        },
+        {
+            "name": "Image/Profile3.svg"
+        },
+        {
+            "name": "Image/create_po.svg"
+        },
+        {
+            "name": "Image/calculatorB.svg"
+        },
+        {
+            "name": "Image/Confirmation.svg"
+        },
+        {
+            "name": "Image/filter.svg"
+        },
+        {
+            "name": "Image/Exalca.svg"
+        },
+        {
+            "name": "Image/Production.svg"
+        },
+        {
+            "name": "Image/Prd_Order_Closed.svg"
+        },
+        {
+            "name": "Image/delete.svg"
+        },
+        {
+            "name": "Image/ExalcaLogo.svg"
+        },
+        {
+            "name": "Image/Release_po.svg"
+        },
+        {
+            "name": "Image/Log_Details.svg"
+        },
+        {
+            "name": "Image/Shift_Dashboard.svg"
+        },
+        {
+            "name": "Image/tbcancel.svg"
+        },
+        {
+            "name": "Image/Bell.svg"
+        },
+        {
+            "name": "Image/Icon_delete.svg"
+        },
+        {
+            "name": "Image/create_po1.svg"
+        },
+        {
+            "name": "Image/logon.svg"
+        },
+        {
+            "name": "Image/Breakdown.svg"
+        },
+        {
+            "name": "Image/Preview.svg"
+        },
+        {
+            "name": "Image/Production_Order.svg"
+        },
+        {
+            "name": "Image/breakdownimg.svg"
+        },
+        {
+            "name": "Image/Create.svg"
+        },
+        {
+            "name": "Image/Planned_Order.svg"
+        },
+        {
+            "name": "js/sketch.js"
+        },
+        {
+            "name": ".project.json"
+        },
+        {
+            "name": "Fragment/changeOrder.Fragment.xml"
+        },
+        {
+            "name": "Fragment/Breakdown.Fragment.xml"
+        },
+        {
+            "name": "Fragment/Material.Fragment.xml"
+        },
+        {
+            "name": "Fragment/Confirm.Fragment.xml"
+        },
+        {
+            "name": "Fragment/MaterialF4.Fragment.xml"
+        },
+        {
+            "name": "Fragment/Edit.Fragment.xml"
+        },
+        {
+            "name": "Fragment/Sales.Fragment.xml"
+        },
+        {
+            "name": "Fragment/equip.Fragment.xml"
+        },
+        {
+            "name": "Fragment/Plant.Fragment.xml"
+        },
+        {
+            "name": "Fragment/Pdf.Fragment.xml"
+        },
+        {
+            "name": "Fragment/Create.Fragment.xml"
+        },
+        {
+            "name": "Fragment/imgFrag.Fragment.xml"
+        },
+        {
+            "name": "Fragment/Ordertype.Fragment.xml"
+        },
+        {
+            "name": "Fragment/Profile.Fragment.xml"
+        },
+        {
+            "name": "Fragment/Plantf4.Fragment.xml"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "view/View1.view.xml"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "controller/View1.controller.js"
+        },
+        {
+            "name": "controller/imageAnn.controller.js"
+        },
+        {
+            "name": "webapp/localService/metadata.xml"
+        },
+        {
+            "name": "webapp/localService/ZSHIFT_HO_SRV/metadata.xml"
+        }
+    ]
+}

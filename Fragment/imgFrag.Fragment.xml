@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<!--<ResponsivePopover id="id_Popover" showArrow="false" modal="true" showHeader="false" placement="Left" contentHeight="92%" contentWidth="60%">-->
+	<Dialog contentWidth="60%" id="id_imgFrag" showHeader="false">
+		<Toolbar>
+			<ToolbarSpacer/>
+			<Text text="Production Log Details" id="id_imgFragtxt" class="Cl_txtitm"/>
+			<ToolbarSpacer/>
+			<!--<Image  press="fn_closepdf"/>-->
+			<Button icon="sap-icon://decline" class="btn_close" press="fn_closeimg"></Button>
+		</Toolbar>
+		<content>
+			<Panel id="id_Image1" visible="true"></Panel>
+		</content>
+		
+	</Dialog>
+</core:FragmentDefinition>

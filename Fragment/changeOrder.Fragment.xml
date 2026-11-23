@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog showHeader="false" class="sapUiSizeCompact cl_fragment">
+		<VBox width="100%" class="cl_frag sapUiSizeCompact">
+			<HBox class="cl_createfragment" justifyContent="Center" alignContent="Center" alignItems="Center">
+				<Label text="Change Production Order" class="cl_ftext sapUiSmallMarginTop"></Label>
+			</HBox>
+			<VBox class="sapUiTinyMargin sapUiSmallMarginTop sapUiLargeMarginBeginEnd">
+				<Toolbar class="cl_tool">
+					<Label text="Order No" class=" cl_font_txt "/>
+					<ToolbarSpacer/>
+					<Input width="12rem" height=".2rem" placeholder="Select Order Type" required="true" id="id_chorderno" value="{tempModel>/0/order}"
+						editable="false" valueHelpRequest="fnPlantFrg" showValueHelp="true" class="cl_input_t1 sapUiSizeCompact "/>
+				</Toolbar>
+				<Toolbar class="cl_tool" height="2rem">
+					<Label text="Start Date" class=" cl_font_txt "/>
+					<ToolbarSpacer/>
+					<DatePicker width="12rem" height=".2rem" id="id_changeordersdate" value="{tempModel>/0/fromDate}" change="fndatevalid" liveChange="fndatevalid"
+						valueFormat="yyyy-MM-dd" displayFormat="dd-MM-yyyy" class="cl_input_t sapUiSizeCompact sapUiMediumMarginTopBottom "/>
+				</Toolbar>
+				<Toolbar class="cl_tool">
+					<Label text="End Date" class=" cl_font_txt "/>
+					<ToolbarSpacer/>
+					<DatePicker width="12rem" height=".2rem" id="id_changeorderedate" value="{tempModel>/0/toDate}" change="fndatevalid1" liveChange="fndatevalid1"
+						valueFormat="yyyy-MM-dd" displayFormat="dd-MM-yyyy" class="cl_input_t sapUiSizeCompact sapUiMediumMarginTopBottom "/>
+				</Toolbar>
+			</VBox>
+			<HBox class="cl_footer" height="2.7rem">
+				<HBox width="20%"></HBox>
+				<Button icon="{JM_ImageModel>/path}frag_close.svg" text="Close" press="fncloseOrderchange"
+					class="sapUiLargeMarginBegin sapUiTinyMarginTop sapUiSizeCompact increaseFont cl_fragclose"></Button>
+				<Button icon="{JM_ImageModel>/path}save.svg" text="Save" press="fnsaveorderchange"
+					class="sapUiSmallMarginBegin sapUiTinyMarginTop sapUiSizeCompact cl_fragcreate01"></Button>
+			</HBox>
+		</VBox>
+	</Dialog>
+</core:FragmentDefinition>

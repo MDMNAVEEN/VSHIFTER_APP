@@ -1,0 +1,92 @@
+<core:FragmentDefinition xmlns="sap.m" id="id_brFrag" xmlns:core="sap.ui.core">
+	<Dialog showHeader="false" class="sapUiSizeCompact cl_fragment">
+		<VBox width="100%" class="cl_frag sapUiSizeCompact">
+			<HBox class="cl_createfragment" justifyContent="Center" alignContent="Center" alignItems="Center">
+				<Label text="Breakdown Creation" class="cl_ftext sapUiSmallMarginTop"></Label>
+			</HBox>
+			<VBox class="sapUiTinyMargin sapUiSmallMarginTop sapUiTinyMarginBegin sapUiSmallMarginEnd">
+				<VBox>
+					<HBox class="sapUiTinyMarginBegin">
+						<Label text="Notification Type" class="sapUiTinyMargin cl_font_txt"/>
+						<HBox width="3%"></HBox>
+						<!--<ComboBox selectedKey="M2(Malfunction Report)" class="cl_border cl_combobox1 cl_combobox3 sapUiTinyMarginTop">-->
+						<!--    <core:Item key="M2(Malfunction Report)" text="M2(Malfunction Report)" class=""/>-->
+						<!--</ComboBox>-->
+						<ComboBox id="id_nttyp" class=" sapUiTinyMarginTop cl_border sapUiTinyMarginTop cl_combobox1 cl_combobox3" width="155px">
+							<core:Item key="{key}" text="I1(Real Estate notification)"/>
+							<core:Item key="{key}" text="M1(Maintenance Request)"/>
+							<core:Item key="{key}" text="M2(Malfunction Report)"/>
+							<core:Item key="{key}" text="M3(Activity Report)"/>
+							<core:Item key="{key}" text="MX(rror msg from Qm)"/>
+							<core:Item key="{key}" text="OS(IHS notification)"/>
+						</ComboBox>
+						<!--<Input width="95%" height=".2rem" placeholder="Select Type" showValueHelp="true" class="cl_input_t sapUiSizeCompact "/>-->
+						<HBox width="4.5%"></HBox>
+						<Label text="Equipment" class="sapUiTinyMargin cl_font_txt"/>
+						<HBox width="1%"></HBox>
+						<!--<Input width="95%" height=".2rem" placeholder="Select Shift" showValueHelp="true" class="cl_input_t sapUiSizeCompact "/>-->
+						<Input showValueHelp="true" id="id_equipf4" valueHelpOnly="true" valueHelpRequest="fnEquipF4"
+							class="cl_input_t sapUiSizeCompact sapUiTinyMarginBegin" width="89%" height=".2rem" editable="true"/>
+					</HBox>
+				</VBox>
+				<VBox>
+					<HBox>
+						<Label text="Start Date" class="sapUiSmallMargin cl_font_txt"/>
+						<HBox width="8%"></HBox>
+						<!--<DatePicker width="89%" change="handleChangeDate" editable="true" class="cl_input_t sapUiSizeCompact sapUiTinyMargin"-->
+						<!--    valueFormat="dd.MM.yyyy" displayFormat="DD/MM/YYYY"/>-->
+						<DatePicker id="id_sdate" width="88%" placeholder="" change="fnvaliddate" liveChange="fnvaliddate" class=" sapUiSizeCompact cl_input_t sapUiTinyMargin"
+							displayFormat="dd-MM-yyyy" valueFormat="yyyy-MM-dd"/>
+						<!--<HBox width="1%"></HBox>-->
+						<Label text="End Date" class="sapUiSmallMargin cl_font_txt"/>
+						<HBox width="1.5%"></HBox>
+						<!--<DatePicker width="89%" change="handleChangeDate" editable="true" class="cl_input_t sapUiSizeCompact sapUiTinyMargin"-->
+						<!--    valueFormat="dd.MM.yyyy" displayFormat="DD/MM/YYYY"/>-->
+						<DatePicker id="id_edate" width="88%" placeholder="" change="fnvaliddate1" liveChange="fnvaliddate1" class=" sapUiSizeCompact sapUiTinyMargin cl_input_t"
+							displayFormat="dd-MM-yyyy" valueFormat="yyyy-MM-dd"/>
+					</HBox>
+				</VBox>
+				<VBox>
+					<HBox class="sapUiTinyMarginBegin">
+						<Label text="Start Time" class="sapUiTinyMargin cl_font_txt"/>
+						<HBox width="11%"></HBox>
+						<!--<TimePicker width="92%" height=".2rem" valueFormat="PT00H00M00S" class="cl_input_t sapUiSizeCompact "/>-->
+						<TimePicker id="id_stime" displayFormat="{timeModel>/0/format}" valueFormat="{timeModel>/0/format}" placeholder="{timeModel>/0/format}"
+							class=" sapUiSizeCompact cl_input_t" width="92%" height=".2rem"/>
+						<HBox width="1%"></HBox>
+						<Label text="End Time" class="sapUiTinyMargin cl_font_txt"/>
+						<HBox width="4%"></HBox>
+						<!--<TimePicker width="94%" height=".2rem" valueFormat="PT00H00M00S" class="cl_input_t sapUiSizeCompact "/>-->
+						<TimePicker id="id_etime" displayFormat="{timeModel>/0/format}" valueFormat="{timeModel>/0/format}" placeholder="{timeModel>/0/format}"
+							class="cl_input_t sapUiSizeCompact" width="94%" height=".2rem"/>
+					</HBox>
+				</VBox>
+				<VBox>
+					<HBox class="sapUiTinyMarginBegin sapUiTinyMarginTop">
+						<Label text="Added By" class="sapUiTinyMargin cl_font_txt"/>
+						<HBox width="11%"></HBox>
+						<!--<Input width="92%" height=".2rem" placeholder="Aswin" showValueHelp="true" class="cl_input_t sapUiSizeCompact "/>-->
+						<Input id="id_addby" showValueHelp="false" valueHelpRequest="fnProfileF4" class=" cl_input_t sapUiSizeCompact" width="9.8rem" height=".2rem"
+							placeholder="Enter Name" editable="true"/>
+						<HBox width="4%"></HBox>
+						<Label text="Reason" class="sapUiTinyMargin cl_font_txt"/>
+						<HBox width="5%"></HBox>
+						<!--<Input width="94%" height=".2rem" placeholder="Oil Leakage" showValueHelp="true" class="cl_input_t sapUiSizeCompact "/>-->
+						<Input id="id_brreason" showValueHelp="false" valueHelpRequest="fnProfileF4" class="sapUiSizeCompact cl_input_t" width="9.7rem"
+							height=".2rem" placeholder="Enter Reason" editable="true"/>
+					</HBox>
+				</VBox>
+			</VBox>
+			<HBox class="cl_footer" height="2.7rem">
+				<HBox width="29%"></HBox>
+				<!--<Button icon="Image/frag_close.svg" text="Close" press="Close3"-->
+				<!--class="sapUiLargeMarginBegin sapUiTinyMarginTop sapUiSizeCompact increaseFont cl_fragclose"></Button>-->
+				<Button text="Close" icon="{JM_ImageModel>/path}frag_close.svg" press="fnBreakClose"
+					class="sapUiLargeMarginBegin sapUiTinyMarginTop sapUiSizeCompact increaseFont cl_fragclose"/>
+				<Button icon="{JM_ImageModel>/path}save.svg" text="Save" press="fnBreakSave"
+					class="sapUiSmallMarginBegin sapUiTinyMarginTop sapUiSizeCompact cl_fragcreate01"/>
+				<!--<Button icon="Image/save.svg" text="Save" press="Break" class="sapUiSmallMarginBegin sapUiTinyMarginTop sapUiSizeCompact cl_fragcreate"></Button>-->
+			</HBox>
+		</VBox>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,72 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog showHeader="false" class="cl_fragment">
+		<VBox class="cl_frag">
+			<HBox class="cl_createfragment" justifyContent="Center" alignContent="Center" alignItems="Center">
+				<Label text="Planned Order Creation" class="cl_ftext sapUiSmallMarginTop"></Label>
+			</HBox>
+			<VBox class="sapUiTinyMargin sapUiSmallMarginTop sapUiSmallMarginBegin sapUiSmallMarginEnd">
+				<HBox>
+					<VBox>
+						<Toolbar class="cl_tool">
+							<Label text="Order Type" class="sapUiSmallMarginBegin cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem" height=".2rem" placeholder="Select Type" id="id_otyp" showValueHelp="true" valueHelpOnly="true"
+								valueHelpRequest="fnProfileF4" class="cl_input_t sapUiSizeCompact sapUiSmallMargin sapUiMediumMarginTop"/>
+						</Toolbar>
+						<Toolbar class="cl_tool">
+							<Label text="Material" class="sapUiSmallMarginBegin cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem" height=".2rem" placeholder="Select Material" showValueHelp="true" id="id_mat" value="" valueHelpRequest="fnMaterialFrg"
+								class="cl_input_t sapUiSizeCompact sapUiSmallMargin sapUiMediumMarginTop"/>
+						</Toolbar>
+						<Toolbar class="cl_tool">
+							<Label text="Start Time" class="sapUiSmallMarginBegin cl_font_txt"/>
+							<ToolbarSpacer/>
+							<TimePicker id="id_plst" valueFormat="{timeModel>/0/format}" displayFormat="{timeModel>/0/format}" placeholder="{timeModel>/0/format}"
+								class="cl_input_t sapUiSizeCompact sapUiSmallMargin sapUiMediumMarginTop" width="10rem" height=".2rem" change="fntimevalidation" liveChange="fntimevalidation"/>
+						</Toolbar>
+						<Toolbar class="cl_tool">
+							<Label text="End Time" class="sapUiSmallMarginBegin cl_font_txt"/>
+							<ToolbarSpacer/>
+							<TimePicker id="id_plet" valueFormat="{timeModel>/0/format}" displayFormat="{timeModel>/0/format}" placeholder="{timeModel>/0/format}"
+								class="cl_input_t sapUiSizeCompact sapUiSmallMargin sapUiMediumMarginTop" width="10rem" height=".2rem"/>
+						</Toolbar>
+					</VBox>
+					<VBox>
+						<Toolbar class="cl_tool">
+							<Label text="Plant" class="sapUiSmallMarginBegin cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem" height=".2rem" placeholder="Select Plant" required="true" id="id_pl" valueHelpRequest="fnPlantFrg" showValueHelp="true"
+								class="cl_input_t sapUiSizeCompact sapUiSmallMargin sapUiMediumMarginTop"/>
+						</Toolbar>
+						<Toolbar class="cl_tool">
+							<Label text="Start Date" class="sapUiSmallMarginBegin cl_font_txt"/>
+							<ToolbarSpacer/>
+							<DatePicker id="id_plsd" width="10rem" height=".2rem" placeholder="" change="fndatevalidation" liveChange="fndatevalidation"
+								valueState="{path:'JMflag>flag1',formatter:'VShifter_New.model.Formatter.fnerror'}"
+								class="cl_input_t sapUiMediumMarginTop sapUiSizeCompact sapUiSmallMargin" valueFormat="yyyy-MM-ddT00:00:00" displayFormat="dd.MM.yyyy"/>
+						</Toolbar>
+						<Toolbar class="cl_tool">
+							<Label text="End Date" class="sapUiSmallMarginBegin cl_font_txt"/>
+							<ToolbarSpacer/>
+							<DatePicker id="id_pled" width="10rem" height=".2rem" placeholder="" change="fndatevalidation1" liveChange="fndatevalidation1"
+								class="cl_input_t sapUiMediumMarginTop sapUiSizeCompact sapUiSmallMargin" displayFormat="dd-MM-yyyy" valueFormat="yyyy-MM-ddT00:00:00"/>
+						</Toolbar>
+						<Toolbar class="cl_tool">
+							<Label text="Target Quantity" class="sapUiSmallMarginBegin cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem" height=".2rem" placeholder="Enter Target Quantity" id="id_qty"
+								class="cl_input_t sapUiMediumMarginTop sapUiSizeCompact sapUiSmallMargin"/>
+						</Toolbar>
+					</VBox>
+				</HBox>
+			</VBox>
+			<HBox class="cl_footer">
+				<HBox width="30%"></HBox>
+				<Button icon="{JM_ImageModel>/path}frag_close.svg" text="Close" press="fnCloseBtnPlanOrd"
+					class="sapUiLargeMarginBegin sapUiSizeCompact increaseFont cl_fragclose"></Button>
+				<Button icon="{JM_ImageModel>/path}frag_create.svg" text="Create" press="fnSavePlanord" class="sapUiSmallMarginBegin sapUiSizeCompact cl_create"></Button>
+			</HBox>
+		</VBox>
+	</Dialog>
+</core:FragmentDefinition>

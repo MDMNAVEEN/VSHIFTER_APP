@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<!--<Dialog>-->
+	<!--liveChange="fnsearchEquip" confirm="fnCloseEquip" cancel="fnCloseEquip">-->
+	<SelectDialog title="{i18n>Equipment No}" class="sapUiPopupWithPadding sapUiSizeCompact cl_shift1" items="{JMEquip>/}" cancel="fnCloseEquip" search="fnsearchEquip"
+		liveChange="fnsearchEquip" confirm="fnCloseEquip">
+		<!--<List items="{path: 'JMEquip>/'}">-->
+		<CustomListItem class="sapUiSizeCompact">
+			<HBox width="95%" height="50px" class="sapUiSizeCompact">
+				<VBox width="10%" class="sapUiSmallMargin" alignContent="Center" alignItems="Center" justifyContent="Center">
+					<!--<Button icon="sap-icon://navigation-down-arrow" press="fn_detailiconpressed" class="cl_btndetail sapUiSmallMargin"/>-->
+					<Button id="messagePopoverBtn" press=".handleMessagePopoverPress" type="Transparent" icon="sap-icon://detail-view" class="btn_close2 sapUiSizeCompact sapUiTinyMargin"
+						ariaHasPopup="Dialog"/>
+				</VBox>
+				<VBox width="85%" alignContent="Center" alignItems="Center" justifyContent="Center">
+					<HBox width="100%" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+						<VBox width="40%" alignContent="Start" alignItems="Start" justifyContent="Start">
+							<Label text="{JMEquip>Equnr}" class="cl_font_txt sapUiTinyMarginTop"/>
+						</VBox>
+						<VBox width="40%" class=" sapUiLargeMarginBegin sapUiTinyMarginEnd" alignContent="End" alignItems="End" justifyContent="End">
+							<Label text="{JMEquip>Eqktx}" class="cl_font_txt"/>
+						</VBox>
+					</HBox>
+				</VBox>
+			</HBox>
+		</CustomListItem>
+		<!--</List>-->
+		<!--<StandardListItem title="{JMEquip>Equnr}" info="{JMEquip>Eqktx}"  tooltip="sap" />-->
+	</SelectDialog>
+	<!--</Dialog>-->
+</core:FragmentDefinition>

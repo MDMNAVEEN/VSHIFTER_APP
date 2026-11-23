@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="{i18n>Plant}" class="sapUiPopupWithPadding sapUiSizeCompact cl_shift1" items="{JMPlant>/}" search="fnSearchPlant" liveChange="fnSearchPlant"
+		confirm="fnClosePlantFrg" cancel="fnClosePlantFrg">
+		<StandardListItem title="{JMPlant>Werks}" info="{JMPlant>Name1}" class="cl_font_txt"/>
+	</SelectDialog>
+</core:FragmentDefinition>

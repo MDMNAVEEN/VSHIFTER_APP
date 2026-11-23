@@ -1,0 +1,110 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog showHeader="false" class="sapUiSizeCompact cl_fragment">
+		<VBox width="100%" class="cl_frag sapUiSizeCompact">
+			<HBox class="cl_createfragment" justifyContent="Center" alignContent="Center" alignItems="Center">
+				<Label text="Production Order Confirmation" class="cl_ftext sapUiSmallMarginTop"></Label>
+			</HBox>
+			<VBox class="sapUiTinyMargin sapUiSmallMarginTop sapUiTinyMarginBegin sapUiSmallMarginEnd">
+				<HBox>
+					<VBox>
+						<Toolbar class="cl_tool">
+							<Label text="Order" class="sapUiTinyMargin cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem"  height=".2rem" showValueHelp="false" value="{tempModel>/0/prodno}" id="id_order" valueHelpRequest="fnProfileF4"
+								editable="false" class="cl_input_t1 sapUiSizeCompact "/>
+						</Toolbar>
+						<Toolbar class="cl_tool " height="2.5rem">
+							<Label text="Confirm Type" class="sapUiTinyMargin sapUiSmallMarginTop cl_font_txt"/>
+							<ToolbarSpacer/>
+							<ComboBox selectedKey="Partial Confirmation" width="10rem" id="id_ctyp" class="cl_border cl_combobox1 cl_combobox4 sapUiTinyMarginTop ">
+								<core:Item key="Partial Confirmation" text="Partial Confirmation" class=""/>
+								<core:Item key="{key}" text="Final Confirmation"/>
+								<core:Item key="{key}" text="Auto Confirmation"/>
+							</ComboBox>
+						</Toolbar>
+						<!--<Toolbar class="cl_tool " height="2.5rem">-->
+						<!--	<Label text="Operation" class="sapUiTinyMargin sapUiSmallMarginTop cl_font_txt"/>-->
+						<!--	<ToolbarSpacer/>-->
+						<!--	<Input width="10rem" text="Operation"  height=".2rem" showValueHelp="false" id="id_matfrg" valueHelpRequest="fnMaterialFrg" editable="true"-->
+						<!--		class="cl_input_t sapUiSizeCompact sapUiTinyMarginTop"/>-->
+						<!--</Toolbar>-->
+						<Toolbar class="cl_tool " height="2.5rem">
+							<Label text="Start Date" class="sapUiTinyMargin sapUiSmallMarginTop cl_font_txt"/>
+							<ToolbarSpacer/>
+							<DatePicker width="10rem"  height=".2rem" id="id_fragstartdate" value="{tempModel>/0/sdate}" editable="false"
+								class="cl_input_t1 sapUiSizeCompact sapUiTinyMarginTop"/>
+						</Toolbar>
+						<Toolbar class="cl_tool " height="2.5rem">
+							<Label text="Start Time" class="sapUiTinyMargin sapUiSmallMarginTop cl_font_txt"/>
+							<ToolbarSpacer/>
+							<TimePicker width="10rem" height=".2rem" id="id_fragstart1date" value="{tempModel>/0/final_time}" editable="false"
+								class="cl_input_t1 sapUiSizeCompact sapUiTinyMarginTop"/>
+						</Toolbar>
+						<Toolbar class="cl_tool " height="2.5rem">
+							<Label text="Yield" class="sapUiTinyMargin sapUiSmallMarginTop cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem" height=".2rem" placeholder="Enter Yield" id="idfragyield" value="{}" editable="true"
+								class="cl_input_t sapUiSizeCompact sapUiTinyMarginTop"/>
+						</Toolbar>
+						<Toolbar class="cl_tool " height="2.5rem">
+							<Label text="Total Qty" class="sapUiTinyMargin sapUiSmallMarginTop cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem" height=".2rem" placeholder="200" id="id_totalqty" value="{tempModel>/0/totalqty}" editable="false"
+								class="cl_input_t1 sapUiSizeCompact sapUiTinyMarginTop"/>
+						</Toolbar>
+					</VBox>
+					<VBox class="sapUiSmallMarginBegin">
+						<Toolbar class="cl_tool">
+							<Label text="Shift" class="sapUiTinyMargin cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem" height=".2rem" editable="false" showValueHelp="false" id="select" value="{tempModel>/0/shift}"
+								valueHelpRequest="fnMaterialFrg" class="cl_input_t1 sapUiSizeCompact "/>
+						</Toolbar>
+						<Toolbar class="cl_tool " height="2.5rem">
+							<Label text="Work Center" class="sapUiTinyMargin sapUiSmallMarginTop cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem" height=".2rem" id="id_workctr" value="{tempModel>/0/workctr}" editable="false"
+								class="cl_input_t1 sapUiSizeCompact sapUiTinyMarginTop"/>
+						</Toolbar>
+						<Toolbar class="cl_tool " height="2.5rem">
+							<Label text="End Date" class="sapUiTinyMargin sapUiSmallMarginTop  cl_font_txt"/>
+							<ToolbarSpacer/>
+							<DatePicker width="10rem" height=".2rem" id="id_poedate" placeholder="" change="fndatevalidate" liveChange="fndatevalidate"
+								class="cl_input_t sapUiSizeCompact sapUiTinyMarginTop sapUiSmallMarginBegin" displayFormat="dd.MM.yyyy" valueFormat="yyyy-MM-dd"/>
+						</Toolbar>
+						<Toolbar class="cl_tool " height="2.5rem">
+							<Label text="End Time" class="sapUiTinyMargin sapUiSmallMarginTop  cl_font_txt"/>
+							<ToolbarSpacer/>
+							<TimePicker width="10rem" height=".2rem" id="id_poetime" displayFormat="{timeModel>/0/format}" valueFormat="{timeModel>/0/format}"
+								placeholder="{timeModel>/0/format}" class="cl_input_t sapUiSizeCompact sapUiTinyMarginTop sapSmallMarginEnd"/>
+						</Toolbar>
+						<Toolbar class="cl_tool " height="2.5rem">
+							<Label text="Scrap" class="sapUiTinyMargin sapUiSmallMarginTop cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem" height=".2rem" placeholder="Enter Scrap" id="id_fragscarp" value="{}" editable="true"
+								class="cl_input_t sapUiSizeCompact sapUiTinyMarginTop"/>
+						</Toolbar>
+						<Toolbar class="cl_tool " height="2.5rem">
+							<Label text="Reason" class="sapUiTinyMargin sapUiSmallMarginTop  cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem" height=".2rem" placeholder="Enter Reason" id="id_reasonForscr" value="" valueHelpRequest="fnPlantFrg" editable="true"
+								class="cl_input_t sapUiSizeCompact sapUiTinyMarginTop"/>
+						</Toolbar>
+						<Toolbar class="cl_tool " height="2.5rem">
+							<Label text="Rework" class="sapUiTinyMargin sapUiSmallMarginTop cl_font_txt"/>
+							<ToolbarSpacer/>
+							<Input width="10rem" height=".2rem" id="id_porw" editable="true" class="cl_input_t sapUiSizeCompact sapUiTinyMarginTop"/>
+						</Toolbar>
+					</VBox>
+				</HBox>
+			</VBox>
+			<HBox class="cl_footer" height="2.7rem">
+				<HBox width="29%"></HBox>
+				<Button icon="{JM_ImageModel>/path}frag_close.svg" text="Close" press="fncloseBtn"
+					class="sapUiLargeMarginBegin sapUiTinyMarginTop sapUiSizeCompact increaseFont cl_fragclose"></Button>
+				<Button icon="{JM_ImageModel>/path}save.svg" text="Save" press="fncreatePoClose"
+					class="sapUiSmallMarginBegin sapUiTinyMarginTop sapUiSizeCompact cl_fragcreate01"></Button>
+			</HBox>
+		</VBox>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog 
+	         id="mySelectDialog" title="{i18n>Ordertype}" class="sapUiPopupWithPadding sapUiSizeCompact cl_shift1" items="{JMOrder>/}" search="fnSearchOrdertype" liveChange="fnSearchOrdertype"
+		confirm="fnCloseOrdertype" cancel="fnCloseOrdertype">
+		<StandardListItem title="{JMOrder>Auart}" info="{JMOrder>Txt}" class="cl_font_txt"/>
+	</SelectDialog>
+</core:FragmentDefinition>
+	<!--<SelectDialog-->
+	<!--	id="mySelectDialog"-->
+	<!--	noDataText="No Products Found"-->
+	<!--	title="Select Product"-->
+	<!--	search=".onSearch"-->
+	<!--	confirm=".onDialogClose"-->
+	<!--	cancel=".onDialogClose"-->
+	<!--	items="{-->
+	<!--		path: '/ProductCollection'-->
+	<!--	}">-->
+	<!--	<StandardListItem-->
+	<!--		title="{Name}"-->
+	<!--		description="{ProductId}"-->
+	<!--		icon="{ProductPicUrl}"-->
+	<!--		iconDensityAware="false"-->
+	<!--		iconInset="false"-->
+	<!--		type="Active" />-->
+	<!--</SelectDialog>-->

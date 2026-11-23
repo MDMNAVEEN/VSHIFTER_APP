@@ -1,0 +1,1365 @@
+<mvc:View controllerName="VShifter_New.controller.View1" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:t="sap.ui.table"
+	xmlns:ui="sap.ui.table.Table" xmlns:u="sap.ui.unified" xmlns:tnt="sap.tnt" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:p="sap.ui.webc.main" xmlns:viz="sap.viz.ui5.controls" xmlns:l="sap.ui.layout"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data">
+	<App>
+		<!--<pages>-->
+		<Page title="{i18n>title}" showHeader="false" class="cl_white">
+			<content>
+				<Dialog title="Shift Details" showHeader="false" class="cl_text1 cl_fragment" id="id_dia">
+					<VBox alignContent="Center" alignItems="Center" justifyContent="Center">
+						<HBox class="cl_createfragment sapUiTinyMarginBottom sapUiLargeMarginBeginEnd" width="100%" height="3rem" alignContent="Center"
+							alignItems="Center" justifyContent="Center">
+							<Label text="Shift Details" class="cl_ftext sapUiTinyMarginTop"></Label>
+						</HBox>
+						<VBox class="sapUiLargeMarginBeginEnd">
+							<Toolbar class="cl_tool">
+								<Label text="Shift" class="cl_font_txt1 sapUiSmallMarginTop"/>
+								<ToolbarSpacer/>
+								<ComboBox id="id_shift" class="sapUiSizeCompact sapUiSmallMarginTop cl_border1 cl_combobox1 cl_combobox01" width="187px">
+									<core:Item key="{key}" text="SHIFT-1"/>
+									<core:Item key="{key}" text="SHIFT-2"/>
+									<core:Item key="{key}" text="SHIFT-3"/>
+								</ComboBox>
+							</Toolbar>
+							<Toolbar class="cl_tool">
+								<Label text="Supervsior Name" class="cl_font_txt1 sapUiSmallMarginTop"/>
+								<ToolbarSpacer/>
+								<Input id="id_name" placeholder="Enter Name" class="sapUiSizeCompact sapUiTinyMarginTop cl_border1 cl_combobox1 cl_combobox01"
+									liveChange="fnSupnameVal" width="187px" editable="true"/>
+							</Toolbar>
+							<Toolbar class="cl_tool">
+								<Label text="Supervsior Id" class="cl_font_txt1 sapUiSmallMarginTop"/>
+								<ToolbarSpacer/>
+								<Input id="id_supid" placeholder="Enter Number" type="Number"
+									class="sapUiSizeCompact sapUiTinyMarginTop cl_border1 cl_combobox1 cl_combobox01" liveChange="fnsupIdVal" width="187px" editable="true"/>
+							</Toolbar>
+						</VBox>
+						<HBox class="cl_footer sapUiLargeMarginBeginEnd sapUiSmallMarginTop" height="3rem" width="100%" alignContent="Center" alignItems="Center"
+							justifyContent="Center">
+							<Button text="Cancel" icon="{JM_ImageModel>/path}frag_close.svg" press="fncancel" class=" sapUiSizeCompact increaseFont cl_fragclose"/>
+							<Button icon="{JM_ImageModel>/path}ok.svg" text="Ok" press="fnDiaclose" class="sapUiSmallMarginBegin sapUiSizeCompact cl_fragcreate"/>
+						</HBox>
+					</VBox>
+				</Dialog>
+				<Toolbar class="cl_toolbar" width="100%">
+					<!-- Exalca Logo -->
+					<Image src="{JM_ImageModel>/path}ExalcaLogo.svg" class="cl_logo sapUiSmallMarginBegin "/>
+					<ToolbarSpacer/>
+					<!-- VShifter Logo -->
+					<VBox width="10rem" height="24px" class="cl_showDesktopTablet"/>
+					<Image src="{JM_ImageModel>/path}VShifterlogo.svg" class="cl_imgvshifter"/>
+					<ToolbarSpacer/>
+					<!-- Shift Remaining -->
+					<VBox class="cl_right cl_showDesktopTablet">
+						<Label text="{i18n>Shift Remaining }" class="cl_shiftR"/>
+					</VBox>
+					<!-- Shift Timing -->
+					<VBox height="70%" class="sapUiSizeCompact" justifyContent="Center">
+						<Label text="{i18n>Shift Remaining }" class="cl_shiftR sapUiVisibleOnlyOnPhone"/>
+						<VBox width="4rem" class="cl_timing sapUiSizeCompact " alignContent="Center" alignItems="Center" justifyContent="Center">
+							<Label id="appdate" text="" class="sapUiSizeCompact cl_timeS"/>
+						</VBox>
+						<Slider width="7rem" id="shifttime" min="0" max="7" tooltip="shifttime" enabled="false"
+							class="sapUiTinyMarginBegin cl_slider4 cl_showDesktopTablet"/>
+					</VBox>
+					<ToolbarSeparator class="cl_tool_seperater"/>
+					<!-- Profile -->
+					<Image src="{JM_ImageModel>/path}Profile1.svg" class="cl_profile1 sapUiVisibleOnlyOnDesktop "/>
+					<VBox>
+						<Label text="" id="id_lname" class="cl_shiftD sapUiTinyMarginTop"/>
+						<Label text="" id="id_lid" class="cl_shiftL sapUiTinyMarginBottom"/>
+					</VBox>
+					<!-- Logout -->
+					<Button icon="{JM_ImageModel>/path}logon.svg" type="Transparent" press="_handleLogout" class="sapUiSizeCompact cl_logon"/>
+				</Toolbar>
+				<l:Grid id="id_filterbar" class="sapUiTinyMarginTop" defaultSpan="XL3 L2 M3 S6" hSpacing="1" vSpacing="0" width="100%">
+					<!-- Plant -->
+					<HBox alignItems="Center" width="100%">
+						<layoutData>
+							<l:GridData span="L2 M3 S6"/>
+						</layoutData>
+						<Label text="Plant" labelFor="id_plant" width="3rem" class="sapUiTinyMarginEnd cl_font_t"/>
+						<Input id="id_plant" placeholder="Select Plant" width="100%" showValueHelp="true" valueHelpRequest="fnPlantF4" liveChange="fnplantlive"
+							class="cl_input sapUiSizeCompact"/>
+					</HBox>
+					<!-- Material -->
+					<HBox alignItems="Center" width="100%">
+						<layoutData>
+							<l:GridData span="L2 M4 S6"/>
+						</layoutData>
+						<Label text="Material" labelFor="id_material" width="3rem" class="sapUiTinyMarginEnd cl_font_t"/>
+						<Input id="id_material" placeholder="Select Material" showValueHelp="true" valueHelpRequest="fnMaterialF4" liveChange="fnMatlive"
+							class="cl_input sapUiSizeCompact"/>
+					</HBox>
+					<!-- Sales and Organization -->
+					<HBox alignItems="Center" justifyContent="Center" width="100%">
+						<layoutData>
+							<l:GridData span="L3 M5 S12"/>
+						</layoutData>
+						<Label text="{i18n>SalesandOrg}" labelFor="id_sales" width="8rem" class="sapUiTinyMarginEnd cl_font_t"/>
+						<Input id="id_sales" placeholder="{i18n>SelectSalesandOrg}" width="100%" showValueHelp="true" valueHelpRequest="fnSalesF4"
+							liveChange="fnSalelive" class="cl_input sapUiSizeCompact"/>
+					</HBox>
+					<!-- From Date -->
+					<HBox alignItems="Center" width="100%">
+						<layoutData>
+							<l:GridData span="L2 M4 S6"/>
+						</layoutData>
+						<Label text="From" labelFor="DP1" width="2rem" class="sapUiTinyMarginEnd cl_font_t"/>
+						<DatePicker id="DP1" width="100%" editable="true" change="handleChangeDate" liveChange="handleChangeDate" valueFormat="yyyy-MM-dd"
+							displayFormat="dd.MM.yyyy" class="cl_input sapUiSizeCompact"/>
+					</HBox>
+					<!-- To Date -->
+					<HBox alignItems="Center" width="100%">
+						<layoutData>
+							<l:GridData span="L2 M4 S6"/>
+						</layoutData>
+						<Label text="To" labelFor="DP2" width="1rem" class="sapUiTinyMarginEnd cl_font_t"/>
+						<DatePicker id="DP2" width="100%" editable="true" change="handleChangeDate1" liveChange="handleChangeDate1" valueFormat="yyyy-MM-dd"
+							displayFormat="dd.MM.yyyy" class="cl_input sapUiSizeCompact"/>
+					</HBox>
+					<!-- Buttons -->
+					<HBox alignItems="Center" justifyContent="End" width="100%">
+						<layoutData>
+							<l:GridData span="L1 M4 S12"/>
+						</layoutData>
+						<Button id="id_submit" text="Submit" icon="{JM_ImageModel>/path}Applyfilter.svg" press="fnapplyFilter"
+							class="sapUiSizeCompact cl_filter sapUiTinyMarginEnd"/>
+						<Button id="id_reset" text="Reset" icon="{JM_ImageModel>/path}Clear.svg" press="fnclearFilter" class="sapUiSizeCompact cl_clear"/>
+					</HBox>
+				</l:Grid>
+				<ScrollContainer width="100%" height="auto" horizontal="true" vertical="false" focusable="true" class="cl_navScroll sapUiSmallMargin">
+					<HBox width="100%" alignItems="Center" class="cl_navStrip">
+						<List class="cl_hover Cl_btm cl_lstclr cl_navItem" width="190px" mode="SingleSelectMaster" itemPress="fnPoScreen">
+							<CustomListItem type="Active" id="id_dashboard" class="cl_panelBox3">
+								<HBox alignContent="Center" height="60%" alignItems="Center" justifyContent="Center" id="id_hboxD" class="cl_hboxD">
+									<Image src="{JM_ImageModel>/path}Dashboard.svg" class="sapUiTinyMarginBegin cl_imgD"/>
+									<Label text="{i18n>Dashboard}" class="cl_font_d sapUiTinyMargin sapUiMediumMarginEnd"/>
+								</HBox>
+							</CustomListItem>
+						</List>
+						<List class="cl_hover Cl_btm cl_lstclr cl_navItem" width="190px" mode="SingleSelectMaster" itemPress="fnPoScreen1">
+							<CustomListItem type="Active" class="cl_panelBox3">
+								<HBox alignContent="Center" height="70%" alignItems="Center" justifyContent="Center" id="id_hboxPl" class="cl_hboxP">
+									<Image src="{JM_ImageModel>/path}Planned_Order.svg" class="sapUiTinyMargin cl_imgD1"/>
+									<Label text="{i18n>Planned Order}" class="cl_font_d sapUiTinyMargin sapUiMediumMarginEnd"/>
+								</HBox>
+							</CustomListItem>
+						</List>
+						<List class="cl_hover Cl_btm cl_lstclr cl_navItem" width="190px" mode="SingleSelectMaster" itemPress="fnPoScreen2">
+							<CustomListItem type="Active" class="cl_panelBox3">
+								<HBox alignContent="Center" height="70%" alignItems="Center" justifyContent="Center" id="id_hboxPr" class="cl_hboxP">
+									<Image src="{JM_ImageModel>/path}Production_Order.svg" class="sapUiTinyMargin cl_imgD1"/>
+									<Label text="{i18n>Production Order}" class="cl_font_d sapUiTinyMargin sapUiMediumMarginEnd"/>
+								</HBox>
+							</CustomListItem>
+						</List>
+						<List class="cl_hover Cl_btm cl_lstclr cl_navItem" width="190px" mode="SingleSelectMaster" itemPress="fnPoScreen3">
+							<CustomListItem type="Active" class="cl_panelBox3">
+								<HBox alignContent="Center" height="70%" alignItems="Center" justifyContent="Center" id="id_hboxPro" class="cl_hboxP">
+									<Image src="{JM_ImageModel>/path}Prd_Order_Release.svg" class="cl_imgD"/>
+									<Label text="{i18n>Prd. Order Release}" class="cl_font_d sapUiTinyMargin sapUiMediumMarginEnd"/>
+								</HBox>
+							</CustomListItem>
+						</List>
+						<List class="cl_hover Cl_btm cl_lstclr cl_navItem" width="190px" mode="SingleSelectMaster" itemPress="fnPoScreen4">
+							<CustomListItem type="Active" class="cl_panelBox3">
+								<HBox alignContent="Center" height="70%" alignItems="Center" justifyContent="Center" id="id_hboxPrc" class="cl_hboxP">
+									<Image src="{JM_ImageModel>/path}Prd_Order_Closed.svg" class="cl_imgD"/>
+									<Label text="{i18n>PO Confirmation}" class="cl_font_d sapUiTinyMargin sapUiSmallMarginEnd"/>
+								</HBox>
+							</CustomListItem>
+						</List>
+						<List class="cl_hover cl_navItem" width="190px" mode="SingleSelectMaster" itemPress="fnPoScreen6">
+							<CustomListItem type="Active" class="cl_panelBox3">
+								<HBox alignContent="Center" height="75%" alignItems="Center" justifyContent="Center" id="id_hboxPb" class="cl_hboxP">
+									<Image src="{JM_ImageModel>/path}Breakdown.svg" class="cl_imgD"/>
+									<Label text="{i18n>Breakdown}" class="cl_font_d sapUiTinyMargin sapUiMediumMarginEnd"/>
+								</HBox>
+							</CustomListItem>
+						</List>
+					</HBox>
+				</ScrollContainer>
+				<!-- Responsive Dashboard and Filters -->
+				<FlexBox id="id_dashboard1" width="100%" direction="Row" wrap="Wrap" justifyContent="SpaceBetween" alignItems="Center"
+					class="sapUiSmallMarginBegin cl_dashboardResponsive">
+					<!-- Dashboard Segmented Button -->
+					<SegmentedButton selectedKey="kids" class="sapUiSizeCompact sapUiSmallMarginTop cl_segmented" justifyContent="Center" alignContent="Center">
+						<items>
+							<SegmentedButtonItem icon="{JM_ImageModel>/path}ShiftDashboardW.svg" width="50%" id="id_shift_dash" text="Shift Dashboard" key="kids"
+								press="shiftpress" class="sapUiSmallMarginTop"/>
+							<SegmentedButtonItem icon="{JM_ImageModel>/path}Equipment_Dashboard.svg" width="57%" id="id_equip_dash" text="Equipment Dashboard"
+								press="equipmentpress"/>
+						</items>
+					</SegmentedButton>
+					<!-- Responsive Filter Controls -->
+					<FlexBox width="auto" direction="Row" justifyContent="Center" wrap="Wrap" alignItems="Center"
+						class="cl_dashboardFilters sapUiSmallMarginEnd">
+						<ComboBox id="id_wrkcntr" selectedKey="Work Center" width="8rem" class="cl_border cl_combobox1 cl_combobox2 sapUiTinyMarginTop">
+							<core:Item key="Work Center" text="Work Center"/>
+						</ComboBox>
+						<ComboBox id="id_typeqpmnt" selectedKey="Type of Equipment" width="8rem" class="cl_border cl_combobox1 cl_combobox2 sapUiTinyMarginTop">
+							<core:Item key="Type of Equipment" text="Type of Equipment"/>
+						</ComboBox>
+						<ComboBox id="id_mstusd" selectedKey="Most Used" width="8rem"
+							class="cl_border cl_combobox1 sapUiTinyMarginEnd cl_combobox2 sapUiTinyMarginTop">
+							<core:Item key="Most Used" text="Most Used"/>
+						</ComboBox>
+					</FlexBox>
+				</FlexBox>
+				<!-- Upload Dialog -->
+				<Dialog title="Upload File" id="id_updia" visible="false">
+					<VBox alignContent="Center" alignItems="Center" justifyContent="Center">
+						<u:FileUploader id="id_CreateItem_Document" tooltip="{i18n>PleaseuploadFile}" placeholder="{i18n>PleaseuploadFile}"
+							class="sapUiSmallMargin sapUiSizeCompact" name="myFileUpload" change="fnImgUploadComplete" uploadComplete="save" fileType="jpg,png"
+							typeMissmatch="fnTypeMismatch"/>
+					</VBox>
+					<beginButton>
+						<Button text="Cancel" press="fncancelup"/>
+					</beginButton>
+					<endButton>
+						<Button text="Upload" press="fnUpload"/>
+					</endButton>
+				</Dialog>
+				<HBox height=".6rem"></HBox>
+				<!--<ScrollContainer height="60%" vertical="true" focusable="true" id="id_dashboard2" class="sapUiSizeCompact">-->
+				<VBox class="cl_hboxch sapUiSmallMarginBeginEnd" id="id_shiftdashboard" height="60%" width="97.5%">
+					<ScrollContainer height="96%" vertical="true" horizontal="false" focusable="true" id="id_dashboard2" class="sapUiSizeCompact">
+						<!-- FIRST ROW: Shift Efficiency, Supervisor, Shift Log -->
+						<l:Grid width="100%" defaultSpan="XL4 L4 M6 S12" hSpacing="1" vSpacing="1" class="cl_dashboardGrid sapUiTinyMarginTop">
+							<!-- SHIFT EFFICIENCY -->
+							<VBox class="cl_vboxSE" width="100%" height="11rem">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Shift Efficiency" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox class="cl_shiftEfficiencyContent">
+									<HBox width="100%" alignItems="Center">
+										<Label text="Shift 1" class="sapUiSmallMarginBegin sapUiSizeCompact sapUiSmallMarginTop cl_shift cl_shift_size"/>
+										<Slider width="100%" id="id_prgind1" enabled="false" min="0" max="500" class="sapUiTinyMarginBegin cl_slider"/>
+										<Label id="id_prgIndtxt1" class="sapUiTinyMarginBegin sapUiSmallMarginTop cl_shift cl_shift_size"/>
+									</HBox>
+									<HBox width="100%" alignItems="Center" class="sapUiTinyMarginTop">
+										<Label text="Shift 2" class="sapUiSmallMarginBegin sapUiSizeCompact cl_shift cl_shift_size"/>
+										<Slider width="100%" id="id_prgind2" enabled="false" min="0" max="500" class="sapUiTinyMarginBegin cl_slider1"/>
+										<Label id="id_prgIndtxt2" class="sapUiTinyMarginBegin cl_shift cl_shift_size"/>
+									</HBox>
+									<HBox width="100%" alignItems="Center" class="sapUiTinyMarginTop">
+										<Label text="Shift 3" class="sapUiSmallMarginBegin cl_shift cl_shift_size"/>
+										<Slider width="100%" id="id_prgind3" enabled="false" min="0" max="500" class="sapUiTinyMarginBegin cl_slider2 "/>
+										<Label id="id_prgIndtxt3" class="sapUiTinyMarginBegin cl_shift cl_shift_size"/>
+									</HBox>
+								</VBox>
+							</VBox>
+							<!-- SHIFT SUPERVISOR -->
+							<VBox class="cl_vboxSE" width="100%" height="11rem">
+								<HBox class="cl_hbox_down" width="100%" height="2.5rem" alignItems="Center" justifyContent="SpaceBetween">
+									<Label text="Shift Supervisor" class="sapUiSmallMarginBegin cl_shift1"/>
+									<HBox class="sapUiTinyMargin cl_border" justifyContent="Center" alignItems="Center">
+										<Link text="Log Details" class="cl_log_details sapUiTinyMarginBeginEnd"/>
+										<Image src="{JM_ImageModel>/path}Log_Details.svg" class="cl_img_log_details" press="fn_log"/>
+									</HBox>
+								</HBox>
+								<FlexBox width="100%" direction="Row" wrap="Wrap" alignItems="Center" justifyContent="SpaceAround" class="cl_supervisorProfiles">
+									<VBox alignContent="Center" alignItems="Center" justifyContent="Center" class="cl_supervisorProfile sapUiTinyMarginTop">
+										<Image src="{JM_ImageModel>/path}Profile2.svg" class="cl_profile"/>
+										<Label text="" id="id_supName" class="cl_suprvisortxt"/>
+										<Label text="" id="id_supId" class="cl_idtxt"/>
+										<Label text="" id="id_shiftNo" class="cl_shifttxt"/>
+									</VBox>
+									<VBox alignContent="Center" alignItems="Center" justifyContent="Center" class="cl_supervisorProfile sapUiTinyMarginTop">
+										<Image src="{JM_ImageModel>/path}Profile3.svg" class="cl_profile"/>
+										<Label text="" id="id_supName1" class="cl_suprvisortxt"/>
+										<Label text="" id="id_supId1" class="cl_idtxt"/>
+										<Label text="" id="id_shiftNo1" class="cl_shifttxt"/>
+									</VBox>
+									<VBox alignContent="Center" alignItems="Center" justifyContent="Center" class="cl_supervisorProfile sapUiTinyMarginTop">
+										<Image src="{JM_ImageModel>/path}Profile4.svg" class="cl_profile"/>
+										<Label text="" id="id_supName2" class="cl_suprvisortxt"/>
+										<Label text="" id="id_supId2" class="cl_idtxt"/>
+										<Label text="" id="id_shiftNo2" class="cl_shifttxt"/>
+									</VBox>
+								</FlexBox>
+							</VBox>
+							<!-- SHIFT LOG -->
+							<VBox class="cl_vboxSE" width="100%" height="11rem">
+								<layoutData>
+									<l:GridData span="L4 M12 S12"/>
+								</layoutData>
+								<HBox class="cl_hbox_down" height="2.5rem" alignItems="Center" justifyContent="SpaceBetween">
+									<HBox>
+										<Label text="Shift Log" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+										<Button icon="sap-icon://email" text="Mail" type="Transparent" class="sapUiSizeCompact cl_mail sapUiTinyMarginBegin"/>
+									</HBox>
+									<!--<ToolbarSpacer/>-->
+									<DatePicker id="id_yest" width="9rem" editable="true" change="handleChangeDate2" liveChange="handleChangeDate2"
+										class="cl_input_t01 sapUiSizeCompact sapUiTinyMarginBegin" valueFormat="yyyy-MM-dd" displayFormat="dd.MM.yyyy"/>
+								</HBox>
+								<FlexBox width="100%" alignItems="Start" class="cl_shiftDownloadContent">
+									<Image src="{JM_ImageModel>/path}DownloadPDF.svg" class="cl_pdf"/>
+									<VBox class="sapUiTinyMarginBegin" width="100%">
+										<HBox height="2.5rem" class="sapUiTinyMarginBegin sapUiSmallMarginEnd" alignItems="Center" justifyContent="SpaceBetween">
+											<HBox>
+												<Label text="Download Shift 1 Log" id="id_shiftdate1" class="cl_dnimg sapUiSmallMarginBegin sapUiTinyMarginEnd"/>
+												<Label id="id_date" class="cl_dnimg sapUiTinyMarginEnd"/>
+											</HBox>
+											<!--<ToolbarSpacer/>-->
+											<VBox class="cl_rounded">
+												<Button icon="{JM_ImageModel>/path}DownloadPDFB.svg" type="Transparent" class="cl_img_download" press="fnGetPDF"/>
+											</VBox>
+										</HBox>
+										<HBox height="2.5rem" class="sapUiTinyMarginBegin sapUiSmallMarginEnd" alignItems="Center" justifyContent="SpaceBetween">
+											<HBox>
+												<Label text="Download Shift 2 Log" id="id_shiftdate2" class="cl_dnimg sapUiSmallMarginBegin sapUiTinyMarginEnd"/>
+												<Label id="id_date1" class="cl_dnimg sapUiTinyMarginEnd"/>
+											</HBox>
+											<!--<ToolbarSpacer/>-->
+											<VBox class="cl_rounded">
+												<Button icon="{JM_ImageModel>/path}DownloadPDFB.svg" type="Transparent" class="cl_img_download" press="fnGetPDF1"/>
+											</VBox>
+										</HBox>
+										<HBox height="2.5rem" class="sapUiTinyMarginBegin sapUiSmallMarginEnd" alignItems="Center" justifyContent="SpaceBetween">
+											<HBox>
+												<Label text="Download Shift 3 Log" id="id_shiftdate3" class="cl_dnimg sapUiSmallMarginBegin sapUiTinyMarginEnd"/>
+												<Label id="id_date2" class="cl_dnimg sapUiTinyMarginEnd"/>
+											</HBox>
+											<!--<ToolbarSpacer/>-->
+											<VBox class="cl_rounded">
+												<Button icon="{JM_ImageModel>/path}DownloadPDFB.svg" type="Transparent" class="cl_img_download" press="fnGetPDF2"/>
+											</VBox>
+										</HBox>
+									</VBox>
+								</FlexBox>
+							</VBox>
+						</l:Grid>
+						<!-- SECOND ROW: Three Dashboard Charts -->
+						<l:Grid width="100%" defaultSpan="XL4 L4 M6 S12" hSpacing="1" vSpacing="1" class="cl_dashboardGrid sapUiTinyMarginTopBottom">
+							<!-- TOTAL SHIFT DETAILS -->
+							<VBox class="cl_vboxSE" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Total Shift Details" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox width="100%" class="cl_chartbox">
+									<core:HTML content=" &lt;div id=&quot;chart5&quot;&gt; &lt;/div&gt;" class="cl_chart5"/>
+								</VBox>
+							</VBox>
+							<!-- PLANNED ORDER VS PRODUCTION ORDER -->
+							<VBox class="cl_vboxSE" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Planned Order Vs Production Order" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox height="11rem" width="100%">
+									<core:HTML content=" &lt;div id=&quot;chart2&quot;&gt; &lt;/div&gt;"/>
+								</VBox>
+							</VBox>
+							<!-- PRODUCTION ORDER PLANNED VS ACTUAL -->
+							<VBox class="cl_vboxSE" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Production Order Planned Vs Actual" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox height="11rem" width="100%">
+									<core:HTML content=" &lt;div id=&quot;chart&quot;&gt; &lt;/div&gt;"/>
+								</VBox>
+							</VBox>
+						</l:Grid>
+						<!-- THIRD ROW: Breakdown, Quality, Production Loss -->
+						<l:Grid width="100%" defaultSpan="XL4 L4 M6 S12" hSpacing="1" vSpacing="1"
+							class="cl_dashboardGrid sapUiTinyMarginTop sapUiSmallMarginBottom">
+							<!-- BREAKDOWN STATUS -->
+							<VBox class="cl_vboxSE" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Breakdown Status" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox height="11rem" width="100%">
+									<core:HTML content=" &lt;div id=&quot;chart4&quot;&gt; &lt;/div&gt;"/>
+								</VBox>
+							</VBox>
+							<!-- QUALITY REJECTION -->
+							<VBox class="cl_vboxSE" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Quality Rejection" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox height="11rem" width="100%">
+									<core:HTML content=" &lt;div id=&quot;chart1&quot;&gt; &lt;/div&gt;"/>
+								</VBox>
+							</VBox>
+							<!-- PRODUCTION LOSS -->
+							<VBox class="cl_vboxSE" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Production Loss" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox height="11rem" width="100%">
+									<core:HTML content=" &lt;div id=&quot;chart3&quot;&gt; &lt;/div&gt;"/>
+								</VBox>
+							</VBox>
+						</l:Grid>
+					</ScrollContainer>
+				</VBox>
+				<VBox class="cl_hboxch1 sapUiSmallMarginBeginEnd" id="id_equipmentdashboard" height="60%" width="97.5%">
+					<ScrollContainer height="96%" vertical="true" horizontal="false" focusable="true" id="id_dashboard02" class="sapUiSizeCompact">
+						<!-- ROW 1 -->
+						<l:Grid width="100%" defaultSpan="XL4 L4 M6 S12" hSpacing="1" vSpacing="1" class="cl_dashboardGrid">
+							<!-- Equipment Efficiency -->
+							<VBox class="cl_vboxSE sapUiTinyMarginTop" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Equipment Efficiency" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox height="12rem" width="100%">
+									<core:HTML content=" &lt;div id=&quot;chart6&quot;&gt; &lt;/div&gt;"/>
+								</VBox>
+							</VBox>
+							<!-- Overall Production -->
+							<VBox class="cl_vboxSE sapUiTinyMarginTop" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Overall Production" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox height="12rem" width="100%">
+									<Table id="idProductionTable" class="sapUiSmallMarginBeginEnd" width="100%" items="{JMOverall>/}" growing="false">
+										<columns>
+											<Column width="65%">
+												<Text text="Equipments" class="cl_suprvisortxt sapUiLargeMarginBegin"/>
+											</Column>
+											<Column width="35%">
+												<Text text="Production" class="cl_suprvisortxt"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem vAlign="Middle">
+												<cells>
+													<Label text="{JMOverall>Equipments}" class="cl_shifttxt sapUiLargeMarginBegin"/>
+													<Label text="{JMOverall>Production}" class="cl_shifttxt sapUiSmallMarginBegin"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+							</VBox>
+							<!-- Maintenance Status -->
+							<VBox class="cl_vboxSE sapUiTinyMarginTop" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Maintenance Status" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox height="12rem" width="100%">
+									<Table id="idMaintenanceTable" items="{JMOverall>/}" class="sapUiSmallMarginBeginEnd" width="100%">
+										<columns>
+											<Column width="40%">
+												<Text text="Equipments" class="cl_suprvisortxt"/>
+											</Column>
+											<Column width="25%">
+												<Text text="Efficiency" class="cl_suprvisortxt"/>
+											</Column>
+											<Column width="35%">
+												<Text text="Maintanence" class="cl_suprvisortxt"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem vAlign="Middle">
+												<cells>
+													<Label text="{JMOverall>Equipments}" class="cl_shifttxt"/>
+													<Label text="{JMOverall>Production}" class="cl_shifttxt sapUiSmallMarginBegin"/>
+													<Label text="{JMOverall>Maintenance}" class="cl_shifttxt sapUiMediumMarginBegin"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+							</VBox>
+						</l:Grid>
+						<!-- ROW 2 -->
+						<l:Grid width="100%" defaultSpan="XL4 L4 M6 S12" hSpacing="1" vSpacing="1" class="cl_dashboardGrid">
+							<!-- Total Breakdown -->
+							<VBox class="cl_vboxSE" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem" alignItems="Center">
+									<Label text="Total Breakdown" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+									<ToolbarSpacer/>
+									<Button icon="{JM_ImageModel>/path}filter.svg" text="Use Filter" iconFirst="false"
+										class="sapUiSizeCompact sapUiTinyMarginTop sapUiSmallMarginBegin cl_use_filter"/>
+								</HBox>
+								<VBox height="11rem" width="100%">
+									<core:HTML content=" &lt;div id=&quot;chart7&quot;&gt; &lt;/div&gt;"/>
+								</VBox>
+							</VBox>
+							<!-- Breakdown Analysis -->
+							<VBox class="cl_vboxSE" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Breakdown Analysis" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox height="11rem" width="100%">
+									<Table id="idBreakdownTable" items="{JMOverall>/}" class="sapUiTinyMargin" width="100%">
+										<columns>
+											<Column width="65%">
+												<Text text="Equipments" class="cl_suprvisortxt sapUiLargeMarginBegin"/>
+											</Column>
+											<Column width="35%">
+												<Text text="Breakdowns" class="cl_suprvisortxt"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem vAlign="Middle">
+												<cells>
+													<Label text="{JMOverall>Equipments}" class="cl_shifttxt sapUiLargeMarginBegin"/>
+													<Label text="{JMOverall>Breakdowns}" class="cl_shifttxt sapUiSmallMarginBegin"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</VBox>
+							</VBox>
+							<!-- Depreciation Calculator -->
+							<VBox class="cl_vboxSE" width="100%">
+								<HBox class="cl_hbox_down" height="2.5rem">
+									<Label text="Depreciation Calculator" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift1"/>
+								</HBox>
+								<VBox height="11rem" width="100%">
+									<FlexBox direction="Row" wrap="Wrap" alignItems="Center" class="sapUiTinyMargin sapUiSmallMarginTop">
+										<ComboBox selectedKey="Select Equipment" class="cl_border cl_combobox10 sapUiTinyMarginBegin" width="65%">
+											<core:Item key="Select Equipment" text="Select Equipment"/>
+										</ComboBox>
+										<Button icon="{JM_ImageModel>/path}calculatorB.svg" text="Calculate" class="sapUiSizeCompact sapUiSmallMarginBegin cl_filter"/>
+									</FlexBox>
+									<FlexBox direction="Row" wrap="Wrap" alignItems="Center" justifyContent="SpaceAround" class="sapUiTinyMarginTop">
+										<VBox class="sapUiTinyMarginBeginEnd">
+											<Label text="Machine 001" class="cl_machine"/>
+											<Label text="Equipmment Name" class="cl_equipment_name"/>
+										</VBox>
+										<ToolbarSeparator/>
+										<VBox class="sapUiTinyMarginBeginEnd">
+											<Label text="740 hr" class="cl_machine"/>
+											<Label text="Used Time" class="cl_equipment_name"/>
+										</VBox>
+										<ToolbarSeparator/>
+										<VBox class="sapUiTinyMarginBeginEnd">
+											<Label text="240 hr" class="cl_machine"/>
+											<Label text="Balance Time" class="cl_equipment_name"/>
+										</VBox>
+									</FlexBox>
+									<HBox alignContent="Center" alignItems="Center" justifyContent="Center" height="3rem" width="100%">
+										<ProgressIndicator class="sapUiSizeCompact cl_progressbar5" percentValue="70" displayValue="30%" showValue="false" state="None"/>
+									</HBox>
+								</VBox>
+							</VBox>
+						</l:Grid>
+					</ScrollContainer>
+				</VBox>
+				<!--<VBox height="10%">-->
+				<!--	<Label></Label>-->
+				<!--</VBox>-->
+				<!--</ScrollContainer>-->
+				<HBox id="id_planned1" width="100%" height="3rem" alignItems="Center" justifyContent="SpaceBetween"
+					class="cl_tooltop cl_plannedtoolbar sapUiTinyMarginBegin">
+					<HBox alignItems="Center">
+						<Label id="id_plannrd_order" text="{i18n>Planned Order List}" class="cl_font_d2 sapUiTinyMargin sapUiTinyMarginBegin"/>
+						<Text id="id_potxt" class="cl_font_d2 sapUiTinyMargin"/>
+					</HBox>
+					<Button id="id_planned_order_create" icon="{JM_ImageModel>/path}Create.svg" text="Create New" tooltip="Create Planned Order"
+						press="fnPlannedF4" class="sapUiSizeCompact cl_create sapUiSmallMarginEnd"/>
+				</HBox>
+				<HBox width="531%" class="sapUiTinyMarginBegin" id="id_production">
+					<Toolbar width="531%" height="3rem" class="cl_plannedtoolbar">
+						<Label text="{i18n>Production Order}" class="cl_font_d2 sapUiTinyMargin" id="id_production_order"/>
+						<Text id="id_prdor" class="cl_font_d2 sapUiTinyMargin"/>
+					</Toolbar>
+				</HBox>
+				<HBox width="531%" class="sapUiTinyMarginBegin" id="id_Release">
+					<Toolbar width="531%" height="3rem" class="cl_plannedtoolbar">
+						<Label text="{i18n>Production Order Release}" class="cl_font_d2 sapUiTinyMargin" id="id_production_order_release"/>
+						<Text id="id_porelease" class="cl_font_d2 sapUiTinyMargin"/>
+					</Toolbar>
+				</HBox>
+				<HBox width="530%" class="sapUiSmallMarginBegin" id="id_planned3">
+					<Toolbar width="530%" height="2.5rem" class="cl_plannedtoolbar">
+						<Label text="{i18n>Breakdown}" class="cl_font_d2 "/>
+						<!--<Text id="id_rework" class="cl_font_d2 sapUiTinyMargin"/>-->
+					</Toolbar>
+				</HBox>
+				<VBox width="98%" height="60.5%" class="cl_breakdown sapUiSmallMarginBegin" id="id_breakdown">
+					<ScrollContainer height="100%" width="100%" vertical="true" horizontal="false" focusable="true">
+						<l:Grid width="100%" defaultSpan="XL6 L6 M12 S12" hSpacing="1" vSpacing="1" class="cl_breakdownGrid">
+							<!-- CHARTS SECTION -->
+							<VBox width="100%" id="id_breakdown1" class="cl_breakdownCharts">
+								<!-- FIRST ROW: HIGHLY AND LESS BREAKDOWN -->
+								<l:Grid width="100%" defaultSpan="XL6 L6 M6 S12" hSpacing="1" vSpacing="1">
+									<!-- Highly Breakdown -->
+									<VBox class="cl_vboxSE" width="100%">
+										<HBox class="cl_hbox_down">
+											<Label text="Highly Breakdown" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift"/>
+										</HBox>
+										<VBox height="9rem" width="100%" justifyContent="Center">
+											<core:HTML content=" &lt;div id=&quot;chart8&quot;&gt; &lt;/div&gt;"/>
+										</VBox>
+									</VBox>
+									<!-- Less Breakdown -->
+									<VBox class="cl_vboxSE" width="100%">
+										<HBox class="cl_hbox_down">
+											<Label text="Less Breakdown" class="sapUiSmallMarginBegin sapUiTinyMarginTop cl_shift"/>
+										</HBox>
+										<VBox height="9rem" width="100%">
+											<core:HTML content=" &lt;div id=&quot;chart9&quot;&gt; &lt;/div&gt;"/>
+										</VBox>
+									</VBox>
+								</l:Grid>
+								<!-- TOTAL BREAKDOWN -->
+								<VBox width="100%" class="cl_breakdown sapUiTinyMarginTop">
+									<HBox class="sapUiTinyMarginTop" alignContent="Center">
+										<Label text="Total Breakdown" class="sapUiSmallMarginBegin cl_shift"/>
+									</HBox>
+									<HBox class="cl_breakline" width="100%"/>
+									<VBox height="9rem" width="100%">
+										<core:HTML content=" &lt;div id=&quot;chart10&quot;&gt; &lt;/div&gt;"/>
+									</VBox>
+								</VBox>
+							</VBox>
+							<!-- TABLE SECTION -->
+							<VBox width="100%" class="cl_breakdownTable">
+								<t:Table id="id_table07" rows="{JMDetailH>/}" width="100%" height="50%" selectionMode="Single" visibleRowCount="7" cellClick=""
+									class="sapUiSmallMarginTop sapUiSizeCompact cl_potable2">
+									<t:columns>
+										<t:Column width="9.5%">
+											<Text text="Notification No" wrapping="false" class="cl_text cl_font_d1"/>
+											<t:template>
+												<Text text="{JMDetailH>NotifNo}" class="cl_cellfont3"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="8.5%">
+											<Text text="{i18n>P rd Order No}" wrapping="false" class="cl_text cl_font_d1"/>
+											<t:template>
+												<Text id="id_prod_br" text="{JMDetailH>Aufnr}" class="cl_cellfont3"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="8%">
+											<Text text="{i18n>Pld Order No}" wrapping="false" class="cl_text cl_font_d1"/>
+											<t:template>
+												<Text id="id_plan_br" text="{JMDetailH>Plnum}" class="cl_cellfont3"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="8%">
+											<Text text="Created on" wrapping="false" class="cl_text cl_font_d1"/>
+											<t:template>
+												<Text text="{path:'JMDetailH>BrStartdat',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont3"/>
+											</t:template>
+										</t:Column>
+										<t:Column width="21%" height="2rem">
+											<Text text="Actions" wrapping="false" class="cl_text cl_font_d1"/>
+											<t:template>
+												<HBox>
+													<Button icon="{JM_ImageModel>/path}Preview.svg" class="sapUiSizeCompact sapUiTinyMarginBottom cl_tbicon3" press="fnImagePress"/>
+													<Button icon="{JM_ImageModel>/path}add.svg" class="sapUiSizeCompact sapUiTinyMarginBottom sapUiSmallMarginBegin cl_tbicon3"
+														tooltip="Add Image" press="fnUpload"/>
+													<Button icon="{JM_ImageModel>/path}createNotification.svg" text="Create Notification"
+														class="sapUiSizeCompact sapUiSmallMarginBegin cl_tbicon" press="fnBreakAddPress"/>
+												</HBox>
+											</t:template>
+										</t:Column>
+									</t:columns>
+								</t:Table>
+							</VBox>
+						</l:Grid>
+					</ScrollContainer>
+				</VBox>
+				<!--<ScrollContainer id="id_imgAnnScroll" vertical="true" horizontal="false" width="100%" height="100%" class="cl_imgScroll">-->
+				<l:Grid visible="false" defaultSpan="L12 M2 S12" id="id_imgAnnPanel" class=" clGrid sapUiSizeCompact">
+					<l:content>
+						<VBox class="cl_colorBox sapUiTinyMarginTop" alignItems="Center" alignContent="Center" justifyContent="Center">
+							<Button icon="sap-icon://nav-back" class="sapUiTinyMarginBottom cl_back" press="fnBack"></Button>
+							<Button class=" cl_clr1 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr2 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr3 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr4 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr5 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr6 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr7 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr8 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr16 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr9 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr10 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr11 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr12 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr13 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr14 cl_btnCss" press="fnChangeColor"></Button>
+							<Button class=" cl_clr15 cl_btnCss" press="fnChangeColor"></Button>
+							<layoutData>
+								<l:GridData span="L1 M1 S1"/>
+							</layoutData>
+						</VBox>
+						<!--<Panel class="" >-->
+						<VBox class="" alignItems="Center" alignContent="Center" justifyContent="Center">
+							<HBox alignItems="Center" alignContent="Center" justifyContent="Center">
+								<u:FileUploader id="id_fileup" tooltip="{i18n>PleaseuploadFile}" placeholder="{i18n>PleaseuploadFile}"
+									class="cl_fileUploader sapUiSmallMargin sapUiSizeCompact" name="myFileUpload" change="fnImgUploadComplete" uploadComplete="save"
+									fileType="jpg,png" typeMissmatch="fnTypeMismatch"></u:FileUploader>
+								<Button text="Upload" class="cl_btnImgAnn sapUiSizeCompact" press="fnUpload1"/>
+							</HBox>
+							<HBox class="cl_uploadpanel">
+								<core:HTML id="html"
+									content="&lt;canvas id=&quot;colors_sketch&quot; press=&quot;fnpress&quot; width=&quot;500&quot; height=&quot;300&quot; class=&quot;colors_sketch&quot;&gt;&lt;/canvas&gt;"></core:HTML>
+							</HBox>
+							<HBox alignItems="Center" alignContent="Center" justifyContent="Center" class="cl_panelchange">
+								<Button class="cl_btnImgAnn sapUiMediumMarginBegin sapUiSizeCompact" press="d" text="{i18n>Text}"></Button>
+								<Button class="cl_btnImgAnn sapUiMediumMarginBegin sapUiSizeCompact" press="fnClear" text="{i18n>Erase}"></Button>
+								<Button class="cl_btnImgAnn sapUiMediumMarginBegin sapUiSizeCompact" press="download_as_image" text="{i18n>Save}"></Button>
+								<Button class="cl_btnImgAnn sapUiMediumMarginBegin sapUiSizeCompact " press="d" text="{i18n>Sign}"></Button>
+							</HBox>
+							<layoutData class="cl_panel">
+								<l:GridData span="L10 M11 S11"/>
+							</layoutData>
+						</VBox>
+					</l:content>
+				</l:Grid>
+				<!--</ScrollContainer>-->
+				<core:HTML id="color" class="cl_html"></core:HTML>
+				<!--<T:Table id="id_table6" width="97%" justifyContent="Center" selectionMode="None" rows="{JMFinal>/}"-->
+				<!--	class="cl_tableui cl_breakdown sapUiTinyMarginBegin sapUiSmallMarginTop">-->
+				<!--	<T:columns>-->
+				<!--		<T:Column autoResizable="true" hAlign="Center">-->
+				<!--			<Text text="{i18n>Notification No}" class="cl_font_d sapUiSizeCompact"/>-->
+				<!--			<T:template>-->
+				<!--				<Text text=""/>-->
+				<!--			</T:template>-->
+				<!--		</T:Column>-->
+				<!--		<T:Column autoResizable="true" hAlign="Center">-->
+				<!--			<Text text="{i18n>Production Order}" class="cl_font_d sapUiSizeCompact"/>-->
+				<!--			<T:template>-->
+				<!--				<Text text=""/>-->
+				<!--			</T:template>-->
+				<!--		</T:Column>-->
+				<!--		<T:Column autoResizable="true" hAlign="Center">-->
+				<!--			<Text text="{i18n>Planned Order}" class="cl_font_d sapUiSizeCompact"/>-->
+				<!--			<T:template>-->
+				<!--				<Text text=""/>-->
+				<!--			</T:template>-->
+				<!--		</T:Column>-->
+				<!--		<T:Column autoResizable="true" hAlign="Center">-->
+				<!--			<Text text="{i18n>Start Date}" class="cl_font_d sapUiSizeCompact"/>-->
+				<!--			<T:template>-->
+				<!--				<Text text=""/>-->
+				<!--			</T:template>-->
+				<!--		</T:Column>-->
+				<!--		<T:Column autoResizable="true" hAlign="Center">-->
+				<!--			<Text text="{i18n>Action}" class="cl_font_d sapUiSizeCompact"/>-->
+				<!--			<T:template>-->
+				<!--				<Text text=""/>-->
+				<!--			</T:template>-->
+				<!--		</T:Column>-->
+				<!--	</T:columns>-->
+				<!--</T:Table>-->
+				<!--		<Table justifyContent="Center" width="97%" items="{JMFinal>/}" class="cl_table cl_table1 sapUiTinyMarginBegin sapUiSmallMarginTop"-->
+				<!--			id="id_table6">-->
+				<!--			<columns>-->
+				<!--				<Column width="13%">-->
+				<!--					<Label text="Notification No" class="cl_font_d1 sapUiTinyMarginBegin"/>-->
+				<!--				</Column>-->
+				<!--				<Column width="14%">-->
+				<!--					<Label text="Production Order" class="cl_font_d "/>-->
+				<!--				</Column>-->
+				<!--				<Column width="12%">-->
+				<!--					<Label text="Planned Order" class="cl_font_d "/>-->
+				<!--				</Column>-->
+				<!--				<Column width="8%">-->
+				<!--					<Label text="Start Date" class="cl_font_d sapUiTinyMarginBegin"/>-->
+				<!--				</Column>-->
+				<!--				<Column width="8%"></Column>-->
+				<!--				<Column width="15%">-->
+				<!--					<Label text="Action" class="cl_font_d sapUiLargeMarginBegin"/>-->
+				<!--				</Column>-->
+				<!--			</columns>-->
+				<!--			<ColumnListItem justifyContent="Center" class="sapUiSizeCompact">-->
+				<!--				<cells justifyContent="Center">-->
+				<!--					<Label text="{JMFinal>Notification_No}" class="cl_cellfont sapUiSmallMarginTop"/>-->
+				<!--					<Label text="{JMFinal>Production_Order}" class="cl_cellfont sapUiSmallMarginTop"/>-->
+				<!--					<Label text="{JMFinal>Planned_Order}" class="cl_cellfont sapUiSmallMarginTop"/>-->
+				<!--					<Label text="{JMFinal>Start_Date}" class="cl_cellfont sapUiSmallMarginTop sapUiTinyMarginBegin"/>-->
+				<!--					<HBox class="sapUiSizeCompact sapUiTinyMarginTop">-->
+				<!--						<HBox class="cl_circle" height="2.2rem">-->
+				<!--							<Button icon="Image/Preview.svg" class="sapUiSizeCompact cl_tbicon"/>-->
+				<!--						</HBox>-->
+				<!--						<HBox class="sapUiTinyMarginBegin"></HBox>-->
+				<!--						<HBox class="cl_circle" justifyContent="Center">-->
+				<!--							<Button icon="Image/add.svg" class="sapUiSizeCompact cl_tbicon"/>-->
+				<!--						</HBox>-->
+				<!--					</HBox>-->
+				<!--					<HBox class="sapUiSizeCompact sapUiTinyMarginTop">-->
+				<!--						<Button icon="Image/createNotification.svg" text="Create Notification" class="cl_iconbox sapUiSizeCompact cl_tbicon"/>-->
+				<!--					</HBox>-->
+				<!--				</cells>-->
+				<!--			</ColumnListItem>-->
+				<!--		</Table>-->
+				<!--	</VBox>-->
+				<!--</HBox>-->
+				<HBox class="cl_segtop sapUiSmallMarginBegin sapUiSizeCompact" id="id_dashboard3">
+					<SegmentedButton selectedKey="kids" height="2rem" class="sapUiSizeCompact sapUiTinyMarginTop cl_segmented1">
+						<items>
+							<SegmentedButtonItem icon="{JM_ImageModel>/path}Confirmation.svg" width="60%" id="id_confirmation_dash" text="Production Order Confirmation"
+								key="kids" press="confirmation" class="cl_segment"/>
+							<SegmentedButtonItem icon="{JM_ImageModel>/path}CloseW.svg" width="50%" id="id_close_dash" text="Production Order Close" press="orderclose"/>
+							<!--<SegmentedButtonItem icon="Image/CancelW.svg" width="35%" id="id_cancel_dash" text="Production Order Cancel" press="ordercancel"/>-->
+						</items>
+					</SegmentedButton>
+				</HBox>
+				<!--<ScrollContainer height="63%" vertical="true" focusable="true" id="id_dashboard4">-->
+				<VBox width="96%" height="52%" class="sapUiSmallMarginBegin" id="id_planned2">
+					<t:Table id="id_table" class="sapUiTinyMarginEnd sapUiSizeCompact cl_potable " rows="{JMDetailH>/}" width="101.5%" selectionMode="Single"
+						visibleRowCount="8" cellClick="">
+						<t:columns>
+							<t:Column hAlign="Center" width="9%">
+								<Text text="{i18n>Status}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Label text="{path:'JMDetailH>Aufnr',formatter:'VShifter_New.model.Formatter.fnValue'}" class="cl_cellfont01 cl_bkglabel">
+										<customData>
+											<core:CustomData key="data" value="{path:'JMDetailH>Aufnr',formatter:'VShifter_New.model.Formatter.formatStyle'}" writeToDom="true"/>
+										</customData>
+									</Label>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Plant}" wrapping="false" class="cl_text cl_font_d1" textAlign="Center"/>
+								<t:template>
+									<Label text="{JMDetailH>Plant}" class="cl_cellfont" textAlign="Center"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Material}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Label text="{JMDetailH>Matnr}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Material Description}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailH>Maktx}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Planned Order No}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailH>Plnum}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Target}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailH>PlanQty}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Start Date}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{path:'JMDetailH>PlanStrtdate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>End Date}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{path:'JMDetailH>PlanEnddate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Actions}" wrapping="false" class="cl_text cl_font_d1 "/>
+								<t:template>
+									<HBox>
+										<Button icon="{JM_ImageModel>/path}edit.svg" tooltip="Edit" class="sapUiSizeCompact cl_tbicon1 sapUiTinyMarginBottom sapUiMediumMarginBegin"
+											press="fn_changepl"/>
+										<Button icon="{JM_ImageModel>/path}Icon_delete.svg" tooltip="Delete"
+											class="sapUiSizeCompact cl_tbicon1 sapUiTinyMarginBottom sapUiSmallMarginBegin"/>
+									</HBox>
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
+					<!--<Table justifyContent="Center" width="101%" class="cl_table cl_table1 " showNoData="false" id="id_table01">-->
+					<!--	<columns>-->
+					<!--		<Column >-->
+					<!--			<Label text="Status" design="Bold" class="cl_font_d1 sapUiTinyMarginBegin"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Plant" design="Bold" class="cl_font_d1"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Material" design="Bold" class="cl_font_d1"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Material Description" design="Bold" class="cl_font_d1"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Planned Order No" design="Bold" class="cl_font_d1 "/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Target" class="cl_font_d1 "/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Start Date" class="cl_font_d1 "/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="End Date" class="cl_font_d1 "/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Action" class="cl_font_d1 sapUiMediumMarginBegin"/>-->
+					<!--		</Column>-->
+					<!--	</columns>-->
+					<!--</Table>-->
+					<!--<ScrollContainer width="101.9%" height="100%" vertical="true" focusable="true" id="id_dashboard4">-->
+					<!--	<Table justifyContent="Center" width="100%" items="{JMDetailH>/}" class="cl_table2 sapUiSizeCompact" id="id_table">-->
+					<!--		<columns>-->
+					<!--			<Column width="8%">-->
+					<!--<Label text="Status" design="Bold" class="cl_font_d1 sapUiTinyMarginBegin"/>-->
+					<!--			</Column>-->
+					<!--			<Column width="10.5%">-->
+					<!--<Label text="Plant" design="Bold" class="cl_font_d"/>-->
+					<!--			</Column>-->
+					<!--			<Column width="10.5%">-->
+					<!--<Label text="Material" design="Bold" class="cl_font_d"/>-->
+					<!--			</Column>-->
+					<!--			<Column width="10%">-->
+					<!--<Label text="Material Description" design="Bold" class="cl_font_d"/>-->
+					<!--			</Column>-->
+					<!--			<Column>-->
+					<!--<Label text="Planned Order No" design="Bold" class="cl_font_d "/>-->
+					<!--			</Column>-->
+					<!--			<Column>-->
+					<!--<Label text="Target" class="cl_font_d "/>-->
+					<!--			</Column>-->
+					<!--			<Column>-->
+					<!--<Label text="Start Date" class="cl_font_d "/>-->
+					<!--			</Column>-->
+					<!--			<Column>-->
+					<!--<Label text="End Date" class="cl_font_d "/>-->
+					<!--			</Column>-->
+					<!--			<Column width="8%">-->
+					<!--<Label text="Action" class="cl_font_d sapUiSmallMarginBegin"/>-->
+					<!--			</Column>-->
+					<!--			<Column width=".5rem"></Column>-->
+					<!--		</columns>-->
+					<!--		<ColumnListItem justifyContent="Center" class="sapUiSizeCompact">-->
+					<!--			<cells justifyContent="Center">-->
+					<!--				<VBox width="73%" height="1.3rem" class="data sapUiSizeCompact sapUiSmallMarginTop" justifyContent="Center">-->
+					<!--					<HBox height=".5rem"></HBox>-->
+					<!--					<Label text="{path: 'JMDetailH>Aufnr',formatter:'VShifter_New.model.Formatter.fnValue'}" class="cl_cellfont1 sapUiTinyMarginBegin"/>-->
+					<!--					<customData>-->
+					<!--						<core:CustomData key="data" value="{path: 'JMDetailH>Aufnr',formatter:'VShifter_New.model.Formatter.formatStyle'}" writeToDom="true"/>-->
+					<!--					</customData>-->
+					<!--				</VBox>-->
+					<!--				<Label text="{JMDetailH>Plant}" class="cl_cellfont sapUiSmallMarginTop"/>-->
+					<!--				<Label text="{JMDetailH>Matnr}" class="cl_cellfont sapUiSmallMarginTop"/>-->
+					<!--				<Label text="{JMDetailH>Maktx}" class="cl_cellfont sapUiSmallMarginTop"/>-->
+					<!--				<Label text="{JMDetailH>Plnum}" class="cl_cellfont sapUiSmallMarginTop"/>-->
+					<!--				<Label text="{JMDetailH>PlanQty}" class="cl_cellfont sapUiSmallMarginTop"/>-->
+					<!--				<Label text="{path:'JMDetailH>PlanStrtdate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont sapUiSmallMarginTop"/>-->
+					<!--				<Label text="{path:'JMDetailH>PlanEnddate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont sapUiSmallMarginTop"/>-->
+					<!--				<HBox class="sapUiSizeCompact sapUiTinyMarginTop" justifyContent="Center" alignContent="Center" alignItems="Center">-->
+					<!--					<HBox class="" height="2.2rem">-->
+					<!--						<Button icon="Image/edit.svg" tooltip="edit" class="sapUiSizeCompact cl_tbicon1 " press="fn_changepl"/>-->
+					<!--					</HBox>-->
+					<!--					<HBox class="sapUiSmallMarginBegin"></HBox>-->
+					<!--					<HBox class="" justifyContent="Center" height="2.2rem">-->
+					<!--						<Button icon="Image/Icon_delete.svg" class="sapUiSizeCompact cl_tbicon1"/>-->
+					<!--					</HBox>-->
+					<!--				</HBox>-->
+					<!--			</cells>-->
+					<!--		</ColumnListItem>-->
+					<!--	</Table>-->
+					<!--</ScrollContainer>-->
+					<t:Table id="id_table02" class="sapUiTinyMarginEnd sapUiSizeCompact cl_potable " rows="{JMDetailH>/}" width="101.5%" selectionMode="Single"
+						visibleRowCount="8" cellClick="">
+						<t:columns>
+							<t:Column hAlign="Center" width="9%">
+								<Text text="{i18n>Status}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Label text="{path:'JMDetailH>Aufnr',formatter:'VShifter_New.model.Formatter.fnValue'}" class="cl_cellfont01 cl_bkglabel">
+										<customData>
+											<core:CustomData key="data" value="{path:'JMDetailH>Aufnr',formatter:'VShifter_New.model.Formatter.formatStyle'}" writeToDom="true"/>
+										</customData>
+									</Label>
+								</t:template>
+							</t:Column>
+							<t:Column width="7%">
+								<Text text="{i18n>Plant}" wrapping="false" class="cl_text cl_font_d1" textAlign="Center"/>
+								<t:template>
+									<Label text="{JMDetailH>Plant}" class="cl_cellfont" textAlign="Center"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="7%">
+								<Text text="{i18n>Material}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Label text="{JMDetailH>Matnr}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="12%">
+								<Text text="{i18n>Material Description}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailH>Maktx}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="12%">
+								<Text text="{i18n>Planned Order No}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailH>Plnum}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="14%">
+								<Text text="{i18n>Production Order No}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailH>Aufnr}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Order Type}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Input showValueHelp="true" valueHelpOnly="true" class="cl_cellfont sapUiSizeCompact sapUiTinyMarginTop" id="id_ordertype"
+										valueHelpRequest="fnordertypeF4"></Input>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Target}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailH>PlanQty}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Start Date}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{path:'JMDetailH>PlanStrtdate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>End Date}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{path:'JMDetailH>PlanEnddate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="16%">
+								<Text text="{i18n>Actions}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<HBox>
+										<Button icon="{JM_ImageModel>/path}create_po.svg" id="id_create_po" text="Create PO" press="fnpressAddPrOr"
+											tooltip="Create Production Order" class="date sapUiSizeCompact cl_createpo"/>
+										<Button icon="{JM_ImageModel>/path}edit.svg" tooltip="Edit" class="sapUiSizeCompact cl_tbicon1 sapUiTinyMarginBottom sapUiTinyMarginBegin"
+											press="fnpresschangepo"/>
+										<Button icon="{JM_ImageModel>/path}Icon_delete.svg" tooltip="Delete"
+											class="sapUiSizeCompact cl_tbicon1 sapUiTinyMarginBegin sapUiTinyMarginBottom"/>
+									</HBox>
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
+					<t:Table id="id_table03" class="sapUiTinyMarginEnd sapUiSizeCompact cl_potable " rows="{JMDetailRF>/}" width="101.5%" selectionMode="Single"
+						visibleRowCount="8" cellClick="">
+						<t:columns>
+							<t:Column hAlign="Center" width="10%">
+								<Text text="{i18n>Status}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Label text="{path:'JMDetailRF>Releaseflag',formatter:'VShifter_New.model.Formatter.fnrelease'}" class="cl_cellfont01 cl_bkglabel2">
+										<customData>
+											<core:CustomData key="data" value="{path:'JMDetailRF>Releaseflag',formatter:'VShifter_New.model.Formatter.formatStyle'}" writeToDom="true"/>
+										</customData>
+									</Label>
+								</t:template>
+							</t:Column>
+							<t:Column width="7%">
+								<Text text="{i18n>Plant}" wrapping="false" class="cl_text cl_font_d1" textAlign="Center"/>
+								<t:template>
+									<Label text="{JMDetailRF>Plant}" class="cl_cellfont" textAlign="Center"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="8%">
+								<Text text="{i18n>Material}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Label text="{JMDetailRF>Matnr}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="12%">
+								<Text text="{i18n>Material Description}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Maktx}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Planned Order No}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Plnum}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="12%">
+								<Text text="{i18n>Production Order No}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Aufnr}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Target}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>PlanQty}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Start Date}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{path:'JMDetailRF>PlanStrtdate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>End Date}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{path:'JMDetailRF>PlanEnddate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column>
+								<Text text="{i18n>Actions}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Button icon="{JM_ImageModel>/path}Release_po.svg" text="Release PO" class=" sapUiSizeCompact sapUiTinyMarginBottom cl_tbicon2"
+										tooltip="Release PO" press="fnconvert"/>
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
+					<t:Table id="id_TablePOclose" class="sapUiTinyMarginEnd sapUiSizeCompact cl_potable1 sapUiTinyMarginTop" rows="{JMDetailRF>/}"
+						width="101.5%" selectionMode="Single" visibleRowCount="8" cellClick="">
+						<t:columns>
+							<t:Column hAlign="Center" width="9%">
+								<Text text="{i18n>Status}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Label text="{path:'JMDetailRF>Confirmation',formatter:'VShifter_New.model.Formatter.fnValue'}" class="cl_cellfont02 cl_bkglabel1">
+										<customData>
+											<core:CustomData key="data" value="{path:'JMDetailRF>Confirmation',formatter:'VShifter_New.model.Formatter.formatStyle'}" writeToDom="true"/>
+										</customData>
+									</Label>
+								</t:template>
+							</t:Column>
+							<t:Column width="7%">
+								<Text text="{i18n>Plant}" wrapping="false" class="cl_text cl_font_d1" textAlign="Center"/>
+								<t:template>
+									<Label text="{JMDetailRF>Plant}" class="cl_cellfont3" textAlign="Center"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="8%">
+								<Text text="{i18n>Material}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Label text="{JMDetailRF>Matnr}" class="cl_cellfont3"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="13%">
+								<Text text="{i18n>Material Description}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Maktx}" class="cl_cellfont3"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="12%">
+								<Text text="{i18n>Planned Order No}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Plnum}" class="cl_cellfont3"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="13%">
+								<Text text="{i18n>Production Order No}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Aufnr}" class="cl_cellfont3"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Yield}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Yield}" class="cl_cellfont3"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Scarp}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Scarp}" class="cl_cellfont3"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Rework}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Rework}" class="cl_cellfont3"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Start Date}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{path:'JMDetailRF>PoSdate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont3"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>End Date}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{path:'JMDetailRF>PoEdate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont3"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Actions}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Button icon="{JM_ImageModel>/path}confirm.svg" text="Confirm" class=" sapUiSizeCompact sapUiTinyMarginBottom cl_tbicon"
+										tooltip="Confirm PO" press="fnPOclosedDia"/>
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
+					<t:Table id="id_table05" class="sapUiTinyMarginEnd sapUiSizeCompact cl_potable1 sapUiTinyMarginTop" rows="{JMDetailRF>/}" width="101.5%"
+						selectionMode="Single" visibleRowCount="8" cellClick="">
+						<t:columns>
+							<t:Column hAlign="Center" width="9%">
+								<Text text="{i18n>Status}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Label text="{path:'JMDetailRF>PoClose',formatter:'VShifter_New.model.Formatter.fnValue'}" class="cl_cellfont01 cl_bkglabel">
+										<customData>
+											<core:CustomData key="data" value="{path:'JMDetailRF>PoClose',formatter:'VShifter_New.model.Formatter.formatStyle'}" writeToDom="true"/>
+										</customData>
+									</Label>
+								</t:template>
+							</t:Column>
+							<t:Column width="7%">
+								<Text text="{i18n>Plant}" wrapping="false" class="cl_text cl_font_d1" textAlign="Center"/>
+								<t:template>
+									<Label text="{JMDetailRF>Plant}" class="cl_cellfont" textAlign="Center"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="7%">
+								<Text text="{i18n>Material}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Label text="{JMDetailRF>Matnr}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="13%">
+								<Text text="{i18n>Material Description}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Maktx}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="12%">
+								<Text text="{i18n>Planned Order No}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Plnum}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="13%">
+								<Text text="{i18n>Production Order No}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Aufnr}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Notification}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>NotifNo}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="6%">
+								<Text text="{i18n>Target}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>PlanQty}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="6%">
+								<Text text="{i18n>Yield}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>Yield}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Work Center}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{JMDetailRF>WorkCenter}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Start Date}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{path:'JMDetailRF>PlanStrtdate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>End Date}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Text text="{path:'JMDetailRF>PlanEnddate',formatter:'VShifter_New.model.Formatter.fnDateFormat'}" class="cl_cellfont"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="10%">
+								<Text text="{i18n>Actions}" wrapping="false" class="cl_text cl_font_d1"/>
+								<t:template>
+									<Button icon="{JM_ImageModel>/path}tbclose.svg" text="Close" class=" sapUiSizeCompact sapUiTinyMarginBottom cl_tbicon" tooltip="Close PO"
+										press="fnClosepo"/>
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
+				</VBox>
+				<Dialog class="cl_diaEquipFrag " showHeader="false" visible="false" id="id_diaEquip">
+					<subHeader>
+						<Toolbar>
+							<ToolbarSpacer/>
+							<Title text="Equipment Details" class="cl_breakequ"/>
+							<ToolbarSpacer/>
+							<Button icon="{JM_ImageModel>/path}frag_close.svg" type="Transparent" class="btn_close1 sapUiSizeCompact sapUiTinyMarginEnd"
+								press="fncloseDiaEquip"/>
+						</Toolbar>
+					</subHeader>
+					<HBox width="100%" class="sapUiTinyMarginTop">
+						<VBox width="50%" class="sapUiLargeMarginBegin" alignContent="Start" alignItems="Start" justifyContent="Center">
+							<Text text="Number"/>
+						</VBox>
+						<Label text="-"/>
+						<VBox width="50%" class="sapUiLargeMarginEnd" alignContent="End" alignItems="End" justifyContent="Center">
+							<Text text="{tempModel>/0/equipno}"/>
+						</VBox>
+					</HBox>
+					<HBox width="100%">
+						<VBox width="50%" class="sapUiLargeMarginBegin" alignContent="Start" alignItems="Start" justifyContent="Center">
+							<Text text="Description"/>
+						</VBox>
+						<Label text="-"/>
+						<VBox width="50%" class="sapUiLargeMarginEnd" alignContent="End" alignItems="End" justifyContent="Center">
+							<Text text="{tempModel>/0/equipdes}"/>
+						</VBox>
+					</HBox>
+					<HBox width="100%">
+						<VBox width="50%" class="sapUiLargeMarginBegin" alignContent="Start" alignItems="Start" justifyContent="Center">
+							<Text text="Created On"/>
+						</VBox>
+						<Label text="-"/>
+						<VBox width="50%" class="sapUiLargeMarginEnd" alignContent="End" alignItems="End" justifyContent="Center">
+							<Text text="{tempModel>/0/creton}"/>
+						</VBox>
+					</HBox>
+					<HBox width="100%">
+						<VBox width="50%" class="sapUiLargeMarginBegin" alignContent="Start" alignItems="Start" justifyContent="Center">
+							<Text text="Created By"/>
+						</VBox>
+						<Label text="-"/>
+						<VBox width="50%" class="sapUiLargeMarginEnd" alignContent="End" alignItems="End" justifyContent="Center">
+							<Text text="{tempModel>/0/cretby}"/>
+						</VBox>
+					</HBox>
+					<HBox width="100%">
+						<VBox width="50%" class="sapUiLargeMarginBegin" alignContent="Start" alignItems="Start" justifyContent="Center">
+							<Text text="Type"/>
+						</VBox>
+						<Label text="-"/>
+						<VBox width="50%" class="sapUiLargeMarginEnd" alignContent="End" alignItems="End" justifyContent="Center">
+							<Text text="{tempModel>/0/equiptyp}"/>
+						</VBox>
+					</HBox>
+					<HBox width="100%">
+						<VBox width="50%" class="sapUiLargeMarginBegin" alignContent="Start" alignItems="Start" justifyContent="Center">
+							<Text text="Model No"/>
+						</VBox>
+						<Label text="-"/>
+						<VBox width="50%" class="sapUiLargeMarginEnd" alignContent="End" alignItems="End" justifyContent="Center">
+							<Text text="{tempModel>/0/equipmno}"/>
+						</VBox>
+					</HBox>
+					<HBox class="sapUiTinyMarginBottom" width="100%">
+						<VBox width="50%" class="sapUiLargeMarginBegin" alignContent="Start" alignItems="Start" justifyContent="Center">
+							<Text text="Manufacture No"/>
+						</VBox>
+						<Label text="-"/>
+						<VBox width="50%" class="sapUiLargeMarginEnd" alignContent="End" alignItems="End" justifyContent="Center">
+							<Text text="{tempModel>/0/manufacno}"/>
+						</VBox>
+					</HBox>
+					<!--<endButton>-->
+					<!--	<Button text="close" press="fncloseDiaEquip"/>-->
+					<!--</endButton>-->
+				</Dialog>
+			</content>
+		</Page>
+		<!--</pages>-->
+	</App>
+</mvc:View>
