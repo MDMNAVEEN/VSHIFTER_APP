@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-            - name: Setup Node
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -37,19 +37,17 @@ jobs:
           cordova create app com.mdm.vshifter VSHIFTER_APP
           rm -rf app/www/*
           cp -r webapp/. app/www/
+      - name: Verify Webapp Files
+  run: |
+    echo "Checking Cordova www folder"
+    ls -la app/www/
+    test -f app/www/index.html
+    test -f app/www/Component.js
+    test -f app/www/manifest.json
 
       - name: Add Android platform
         working-directory: app
         run: cordova platform add android
-
-              - name: Check Java and Gradle
-        run: |
-          echo "JAVA_HOME=$JAVA_HOME"
-          which java
-          java -version
-          echo "Gradle version:"
-          cd app
-          ./platforms/android/gradlew -version
 
       - name: Build APK
         working-directory: app
