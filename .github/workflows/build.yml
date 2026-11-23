@@ -32,7 +32,7 @@ jobs:
       - name: Install Cordova
         run: npm install -g cordova
 
-            - name: Check Repository Structure
+      - name: Check Repository Structure
         run: |
           echo "Repository root:"
           pwd
