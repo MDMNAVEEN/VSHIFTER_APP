@@ -1,7 +1,7 @@
 
 name: Build Android APK
 
-"on":
+on:
   push:
     branches:
       - main
@@ -37,13 +37,14 @@ jobs:
           cordova create app com.mdm.vshifter VSHIFTER_APP
           rm -rf app/www/*
           cp -r webapp/. app/www/
+
       - name: Verify Webapp Files
-  run: |
-    echo "Checking Cordova www folder"
-    ls -la app/www/
-    test -f app/www/index.html
-    test -f app/www/Component.js
-    test -f app/www/manifest.json
+        run: |
+          echo "Checking Cordova www folder"
+          ls -la app/www/
+          test -f app/www/index.html
+          test -f app/www/Component.js
+          test -f app/www/manifest.json
 
       - name: Add Android platform
         working-directory: app
