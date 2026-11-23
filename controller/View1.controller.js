@@ -2516,7 +2516,7 @@ this._loadApexCharts()
 			}
 		},
 		fncancel_test : function(){
-			
+			this.getView().byId("id_dia").close();
 		},
 		fncancel: function() {
 			this.initialLoad();
